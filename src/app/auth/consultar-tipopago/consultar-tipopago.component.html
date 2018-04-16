@@ -1,3 +1,5 @@
+<h2>CONSULTAR TIPOS PAGO</h2>
+
 <div class="b-table-container mat-elevation-z8">
     <div class="example-header">
       <mat-form-field>
@@ -6,19 +8,19 @@
     </div>
   
     <mat-table #table [dataSource]="dataSource" matSort>
-      <!-- Id Column -->
+      
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Id.</mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.Id}}</mat-cell>
       </ng-container>
   
-      <!-- Title Column -->
+      
       <ng-container matColumnDef="nombrepago">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.NombrePago}}</mat-cell>
       </ng-container>
   
-      <!-- Description Column -->
+      
       <ng-container matColumnDef="fijo">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Fijo</mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.Fijo}}</mat-cell>
@@ -29,45 +31,30 @@
         <mat-cell *matCellDef="let element"> {{element.Promedio}}</mat-cell>
       </ng-container>
   
-      <!-- Created Column -->
+     
       <ng-container matColumnDef="valor">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Valor</mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.Valor}}</mat-cell>
       </ng-container>
   
   
-      <!-- <ng-container matColumnDef="actions">
+      <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
         <mat-cell *matCellDef="let element">
             <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="openBookmarkURL(element,$event)">
-                  Abrir
+                <button mat-menu-item (click)="openDialogToEditTipoPago(element,$event)">
+                  Modificar
                 </button>
-                <button mat-menu-item (click)="editBookmark(element,$event)">
-                    Editar
+                <button mat-menu-item (click)="deleteTipoPago(element,$event)">
+                    Eliminar
                   </button>
               </mat-menu>
         </mat-cell>
-      </ng-container> -->
-  
-  
-      <!-- <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef> Acciones</mat-header-cell>
-  
-        <mat-cell *matCellDef="let element">
-          <button mat-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="openBookmarkURL(element, $event)">Open</button>
-            <button mat-menu-item (click)="editBookmark(element)">Edit</button>
-          </mat-menu>
-        </mat-cell>
-      </ng-container> -->
-  
+      </ng-container>
+    
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   

@@ -1,0 +1,32 @@
+<form #editForm="ngForm" (ngSubmit)="onSubmit($event)">
+  <div class="b-controls-container">
+    <mat-form-field>
+      <input matInput placeholder="Nombre Pago" [formControl]="nombrepago" 
+      [(ngModel)]="tipopago.NombrePago" required>
+      <mat-error *ngIf="nombrepago.invalid">{{getErrorMessageForName()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Valor" [formControl]="valor" 
+        [(ngModel)]="tipopago.Valor" required>
+        <mat-error *ngIf="valor.invalid">{{getErrorMessageForValue()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Fijo" [formControl]="fijo" 
+        [(ngModel)]="tipopago.Fijo" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Promedio" [formControl]="promedio" 
+        [(ngModel)]="tipopago.Promedio" required>
+      </mat-form-field>
+
+      <div class="clearfix">
+        <button mat-raised-button color="primary" [disabled]="isBeingSaved">
+          Guardar
+        </button>
+      </div>
+
+  </div>
+</form>

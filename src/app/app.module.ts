@@ -10,6 +10,7 @@ import { MantenimientoComponent } from './auth/mantenimiento/mantenimiento.compo
 import { HomeComponent } from './auth/home/home.component';
 import {ConsultarTipopagoService} from './auth/consultar-tipopago/services/consultar-tipopago.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 //Models
 import { TipoPagoResponse } from './auth/consultar-tipopago/models/tipopago-response.model';
 
@@ -32,6 +33,8 @@ import { MAT_CHECKBOX_CLICK_ACTION
   ,MatListModule
   ,MatCheckboxModule } from '@angular/material';
 import { ConsultarTipopagoComponent } from './auth/consultar-tipopago/consultar-tipopago.component';
+import { EditTipopagoComponent } from './auth/consultar-tipopago/edit-tipopago/edit-tipopago.component';
+import { TipoPago } from './auth/consultar-tipopago/models/tipopago-model';
 
 @NgModule({
   declarations: [
@@ -40,8 +43,11 @@ import { ConsultarTipopagoComponent } from './auth/consultar-tipopago/consultar-
     MantenimientoComponent,
     HomeComponent,
     CrearTipopagoComponent,
-    ConsultarTipopagoComponent
-    
+    ConsultarTipopagoComponent,
+    EditTipopagoComponent
+  ],
+  entryComponents:[
+    EditTipopagoComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +55,8 @@ import { ConsultarTipopagoComponent } from './auth/consultar-tipopago/consultar-
     RouterModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     //Material
     MatInputModule,
     MatSortModule,
@@ -63,6 +71,7 @@ import { ConsultarTipopagoComponent } from './auth/consultar-tipopago/consultar-
   ],
   providers: [
     ConsultarTipopagoService,
+    TipoPago,
     {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
   ],
   bootstrap: [AppComponent]
