@@ -35,6 +35,9 @@ import { MAT_CHECKBOX_CLICK_ACTION
 import { ConsultarTipopagoComponent } from './auth/consultar-tipopago/consultar-tipopago.component';
 import { EditTipopagoComponent } from './auth/consultar-tipopago/edit-tipopago/edit-tipopago.component';
 import { TipoPago } from './auth/consultar-tipopago/models/tipopago-model';
+import { CrearProyectosComponent } from './auth/crear-proyectos/crear-proyectos.component';
+import { ProyectoService } from './auth/crear-proyectos/services/proyecto.service';
+import { Proyecto } from './auth/crear-proyectos/models/proyecto.model';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,8 @@ import { TipoPago } from './auth/consultar-tipopago/models/tipopago-model';
     HomeComponent,
     CrearTipopagoComponent,
     ConsultarTipopagoComponent,
-    EditTipopagoComponent
+    EditTipopagoComponent,
+    CrearProyectosComponent
   ],
   entryComponents:[
     EditTipopagoComponent,
@@ -71,7 +75,9 @@ import { TipoPago } from './auth/consultar-tipopago/models/tipopago-model';
   ],
   providers: [
     ConsultarTipopagoService,
+    ProyectoService,
     TipoPago,
+    Proyecto,
     {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
   ],
   bootstrap: [AppComponent]

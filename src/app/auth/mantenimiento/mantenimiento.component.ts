@@ -18,7 +18,7 @@ export class MantenimientoComponent implements OnInit {
 
     this.links= [ { id:'Consultar Tipos Pago', url:'/consultar-tipopago'},
     { id:'Tipos Pago', url:'/crear-tipopago'},
-    { id:'Proyectos', url:'/proyectos'},
+    { id:'Proyectos', url:'/crear-proyectos'},
     { id:'Cargar Archivo', url:'/cargararchivos'},
     { id:'Crear Ingreso', url:'/crearingreso'},
     { id:'Tipo Presupuesto', url:'/tipopresupuesto'}];

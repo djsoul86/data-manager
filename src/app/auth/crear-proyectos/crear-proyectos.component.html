@@ -1,0 +1,19 @@
+<h1>Crear Proyectos</h1>
+<br/>
+<form class="example-form" #createForm="ngForm" 
+    (ngSubmit)="onSubmitCreate($event)">
+ 
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td><mat-form-field class="example-full-width">
+      <input matInput placeholder="Nombre" [formControl]="proyecto">
+    </mat-form-field></td>
+  </tr>
+  <tr>
+    <td>
+        <div class="button-row">
+          <button mat-raised-button color="primary">Guardar</button>
+        </div>
+      </td>
+  </tr>
+</table>
+</form>

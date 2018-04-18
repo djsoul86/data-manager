@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule} from '@angular/material/button';
 import { ConsultarTipopagoService } from '../consultar-tipopago/services/consultar-tipopago.service';
 import { TipoPago } from '../consultar-tipopago/models/tipopago-model';
 import { FormControl, Validators } from '@angular/forms';
