@@ -1,33 +1,37 @@
 <h1>Crear Tipos Pago</h1>
 <br/>
-<form class="example-form" #createForm="ngForm" 
-    (ngSubmit)="onSubmitCreate($event)">
- 
-  <table class="example-full-width" cellspacing="0"><tr>
-    <td><mat-form-field class="example-full-width">
-      <input matInput placeholder="Nombre" [formControl]="nombrepago">
-    </mat-form-field></td>
-    <td><mat-form-field class="example-full-width">
-        <input matInput placeholder="Valor" [formControl]="valor">
-      </mat-form-field>
-    </td>
-  </tr>
-  <tr>
-      <td><mat-form-field class="example-full-width">
-            <input matInput placeholder="Promedio" [formControl]="promedio">
-          </mat-form-field>
-    </td>
+<form class="example-form" #createForm="ngForm" (ngSubmit)="onSubmitCreate($event)">
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Nombre" [formControl]="nombrepago">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Valor" [formControl]="valor">
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Promedio" [formControl]="promedio">
+        </mat-form-field>
+      </td>
       <td>
         <mat-checkbox class="example-margin" [formControl]="fijo">Valor Fijo</mat-checkbox>
         <!-- <input matInput placeholder="Fijo" [(ngModel)]="checked" [formControl]="fijo"> -->
       </td>
-  </tr>
-  <tr>
-    <td>
+    </tr>
+    <tr>
+      <td>
         <div class="button-row">
           <button mat-raised-button color="primary">Primary</button>
         </div>
       </td>
-  </tr>
-</table>
+    </tr>
+  </table>
 </form>

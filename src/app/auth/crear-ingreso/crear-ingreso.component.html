@@ -1,0 +1,54 @@
+<h1>Crear Ingreso</h1>
+<br/>
+<form class="example-form" #createForm="ngForm" 
+(ngSubmit)="onSubmitCreate($event)">
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Descripcion" [formControl]="descripcion">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Valor" [formControl]="value">
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td> 
+        <mat-form-field>
+          <mat-select placeholder="Mes" [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let month of months"  [value]="month.val">
+              {{ month.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+      </td>
+      <td>
+        <mat-form-field>
+          <mat-select placeholder="Year" [(ngModel)]="selectedYear" [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let year of years" [value]="year.value">
+              {{ year.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+
+    </tr>
+    <tr>
+      <td>
+        <mat-checkbox class="example-margin" [formControl]="salario">Salario</mat-checkbox>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="button-row">
+          <button mat-raised-button color="primary">Guardar</button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>

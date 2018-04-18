@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Proyecto } from '../models/proyecto.model';
+import { Ingreso } from '../models/ingreso.model';
 import { MatSnackBar } from '@angular/material';
 
 @Injectable()
-export class ProyectoService {
+export class CrearingresoService {
   apiURL:'http://localhost:49800';
   constructor(public http:HttpClient,public snackBar: MatSnackBar) { 
     this.apiURL = 'http://localhost:49800';
   }
 
-  create(value:Proyecto){
+  create(value:Ingreso){
     
-    const url = `${this.apiURL}/api/ApiProyecto/${value}`;
+    const url = `${this.apiURL}/api/ApiIngreso/${value}`;
     //  return this.http.get<any>(url);
-    console.log(value.Nombre);
+    console.log(value.Descripcion);
     console.log(url);
     return this.http.put(url,value).subscribe(
       (data => console.log(data)),
@@ -27,7 +27,7 @@ export class ProyectoService {
        }
      },
      () => {
-      this.openSnackBar('Se creo el proyecto', 'Guardado');
+      this.openSnackBar('Se creo el ingreso', 'Guardado');
        console.log('Todo ha terminado...')
      } 
      );

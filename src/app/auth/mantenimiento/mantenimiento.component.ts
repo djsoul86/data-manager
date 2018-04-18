@@ -20,7 +20,7 @@ export class MantenimientoComponent implements OnInit {
     { id:'Tipos Pago', url:'/crear-tipopago'},
     { id:'Proyectos', url:'/crear-proyectos'},
     { id:'Cargar Archivo', url:'/cargararchivos'},
-    { id:'Crear Ingreso', url:'/crearingreso'},
+    { id:'Crear Ingreso', url:'/crear-ingreso'},
     { id:'Tipo Presupuesto', url:'/tipopresupuesto'}];
 
   }

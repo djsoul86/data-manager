@@ -4,6 +4,7 @@ import { HomeComponent } from './auth/home/home.component';
 import { CrearTipopagoComponent } from './auth/crear-tipopago/crear-tipopago.component';
 import { ConsultarTipopagoComponent } from './auth/consultar-tipopago/consultar-tipopago.component';
 import { CrearProyectosComponent } from './auth/crear-proyectos/crear-proyectos.component';
+import { CrearIngresoComponent } from './auth/crear-ingreso/crear-ingreso.component';
 
 export const routes: Routes = [
     {
@@ -23,6 +24,9 @@ export const routes: Routes = [
     },
     {
       path: 'consultar-tipopago', component: ConsultarTipopagoComponent, pathMatch: 'full'
+    },
+    {
+      path: 'crear-ingreso', component: CrearIngresoComponent, pathMatch: 'full'
     }
    ];
 

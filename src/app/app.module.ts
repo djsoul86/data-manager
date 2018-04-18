@@ -31,13 +31,18 @@ import { MAT_CHECKBOX_CLICK_ACTION
   ,MatDialogModule
   ,MatPaginatorIntl
   ,MatListModule
-  ,MatCheckboxModule } from '@angular/material';
+  ,MatCheckboxModule
+  ,MatSnackBarModule
+  ,MatSelectModule} from '@angular/material';
 import { ConsultarTipopagoComponent } from './auth/consultar-tipopago/consultar-tipopago.component';
 import { EditTipopagoComponent } from './auth/consultar-tipopago/edit-tipopago/edit-tipopago.component';
 import { TipoPago } from './auth/consultar-tipopago/models/tipopago-model';
 import { CrearProyectosComponent } from './auth/crear-proyectos/crear-proyectos.component';
 import { ProyectoService } from './auth/crear-proyectos/services/proyecto.service';
 import { Proyecto } from './auth/crear-proyectos/models/proyecto.model';
+import { CrearIngresoComponent } from './auth/crear-ingreso/crear-ingreso.component';
+import { Ingreso } from './auth/crear-ingreso/models/ingreso.model';
+import { CrearingresoService } from './auth/crear-ingreso/services/crearingreso.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +53,8 @@ import { Proyecto } from './auth/crear-proyectos/models/proyecto.model';
     CrearTipopagoComponent,
     ConsultarTipopagoComponent,
     EditTipopagoComponent,
-    CrearProyectosComponent
+    CrearProyectosComponent,
+    CrearIngresoComponent
   ],
   entryComponents:[
     EditTipopagoComponent,
@@ -71,13 +77,17 @@ import { Proyecto } from './auth/crear-proyectos/models/proyecto.model';
     MatTableModule,
     MatPaginatorModule,
     MatListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSnackBarModule,
+    MatSelectModule
   ],
   providers: [
     ConsultarTipopagoService,
     ProyectoService,
+    CrearingresoService,
     TipoPago,
     Proyecto,
+    Ingreso,
     {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
   ],
   bootstrap: [AppComponent]
