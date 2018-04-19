@@ -43,6 +43,9 @@ import { Proyecto } from './auth/crear-proyectos/models/proyecto.model';
 import { CrearIngresoComponent } from './auth/crear-ingreso/crear-ingreso.component';
 import { Ingreso } from './auth/crear-ingreso/models/ingreso.model';
 import { CrearingresoService } from './auth/crear-ingreso/services/crearingreso.service';
+import { CrearTipopresupuestoComponent } from './auth/crear-tipopresupuesto/crear-tipopresupuesto.component';
+import { TiposPresupuesto } from './auth/crear-tipopresupuesto/models/tipopresupuesto.model';
+import { CreartipoprespuestoService } from './auth/crear-tipopresupuesto/services/creartipoprespuesto.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,8 @@ import { CrearingresoService } from './auth/crear-ingreso/services/crearingreso.
     ConsultarTipopagoComponent,
     EditTipopagoComponent,
     CrearProyectosComponent,
-    CrearIngresoComponent
+    CrearIngresoComponent,
+    CrearTipopresupuestoComponent
   ],
   entryComponents:[
     EditTipopagoComponent,
@@ -85,9 +89,11 @@ import { CrearingresoService } from './auth/crear-ingreso/services/crearingreso.
     ConsultarTipopagoService,
     ProyectoService,
     CrearingresoService,
+    CreartipoprespuestoService,
     TipoPago,
     Proyecto,
     Ingreso,
+    TiposPresupuesto,
     {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
   ],
   bootstrap: [AppComponent]
