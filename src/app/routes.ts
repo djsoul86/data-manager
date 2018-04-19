@@ -6,31 +6,19 @@ import { ConsultarTipopagoComponent } from './auth/consultar-tipopago/consultar-
 import { CrearProyectosComponent } from './auth/crear-proyectos/crear-proyectos.component';
 import { CrearIngresoComponent } from './auth/crear-ingreso/crear-ingreso.component';
 import { CrearTipopresupuestoComponent } from './auth/crear-tipopresupuesto/crear-tipopresupuesto.component';
+import { PendientesComponent } from './auth/pendientes/pendientes.component';
+import { CrearPendientesComponent } from './auth/crear-pendientes/crear-pendientes.component';
 
 export const routes: Routes = [
-    {
-      path: '', pathMatch: 'full', redirectTo: '/home'
-    },
-    {
-      path: 'mantenimiento', component: MantenimientoComponent
-    },
-    {
-        path: 'home', component: HomeComponent, pathMatch: 'full'
-    },
-    {
-        path: 'crear-tipopago', component: CrearTipopagoComponent, pathMatch: 'full'
-    },
-    {
-      path: 'crear-proyectos', component: CrearProyectosComponent, pathMatch: 'full'
-    },
-    {
-      path: 'consultar-tipopago', component: ConsultarTipopagoComponent, pathMatch: 'full'
-    },
-    {
-      path: 'crear-ingreso', component: CrearIngresoComponent, pathMatch: 'full'
-    },
-    {
-      path: 'crear-tipopresupuesto', component: CrearTipopresupuestoComponent, pathMatch: 'full'
-    }
+    { path: '', pathMatch: 'full', redirectTo: '/home' },
+    { path: 'mantenimiento', component: MantenimientoComponent },
+    { path: 'pendientes', component: PendientesComponent },
+    { path: 'home', component: HomeComponent, pathMatch: 'full' },
+    { path: 'crear-tipopago', component: CrearTipopagoComponent, pathMatch: 'full' },
+    { path: 'crear-proyectos', component: CrearProyectosComponent, pathMatch: 'full' },
+    { path: 'consultar-tipopago', component: ConsultarTipopagoComponent, pathMatch: 'full'},
+    { path: 'crear-ingreso', component: CrearIngresoComponent, pathMatch: 'full' },
+    { path: 'crear-tipopresupuesto', component: CrearTipopresupuestoComponent, pathMatch: 'full'},
+    { path: 'crear-pendientes', component: CrearPendientesComponent, pathMatch: 'full'}
    ];
 

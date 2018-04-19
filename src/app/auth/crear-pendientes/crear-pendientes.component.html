@@ -1,0 +1,40 @@
+<h1>Crear Pendiente</h1>
+<br/>
+<form class="example-form" #createForm="ngForm" (ngSubmit)="onSubmitCreate($event)">
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Proyecto" [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let proy of proyectos" [value]="proy.Id">
+                {{ proy.Nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Pendiente" [formControl]="pendiente"></textarea>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Requerimiento" [formControl]="requerimiento"></textarea>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="button-row">
+            <button mat-raised-button color="primary">Guardar</button>
+          </div>
+        </td>
+      </tr>
+  </table>
+</form>
