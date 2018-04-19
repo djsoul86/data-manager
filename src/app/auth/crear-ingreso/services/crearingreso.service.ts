@@ -14,9 +14,6 @@ export class CrearingresoService {
   create(value:Ingreso){
     
     const url = `${this.apiURL}/api/ApiIngreso/${value}`;
-    //  return this.http.get<any>(url);
-    console.log(value.Descripcion);
-    console.log(url);
     return this.http.put(url,value).subscribe(
       (data => console.log(data)),
       (err:HttpErrorResponse) =>{

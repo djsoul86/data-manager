@@ -1,4 +1,4 @@
-<h1>Crear Pendiente</h1>
+<h1>Crear Anotacion</h1>
 <br/>
 <form class="example-form" #createForm="ngForm" (ngSubmit)="onSubmitCreate($event)">
 
@@ -18,15 +18,17 @@
       <tr>
         <td>
           <mat-form-field class="example-full-width" >
-            <textarea matInput placeholder="Pendiente" [formControl]="pendiente"></textarea>
+            <textarea matInput placeholder="Anotacion" [formControl]="anotacion"></textarea>
           </mat-form-field>
         </td>
       </tr>
       <tr>
         <td>
-          <mat-form-field class="example-full-width">
-            <textarea matInput placeholder="Requerimiento" [formControl]="requerimiento"></textarea>
-          </mat-form-field>
+            <div class="form-group">
+                <label for="exampleInputFile">Archivo</label>
+                <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" (change)="handleFileInput($event.target.files)">
+                <!-- <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small> -->
+              </div>
         </td>
       </tr>
       <tr>

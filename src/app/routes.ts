@@ -8,17 +8,25 @@ import { CrearIngresoComponent } from './auth/crear-ingreso/crear-ingreso.compon
 import { CrearTipopresupuestoComponent } from './auth/crear-tipopresupuesto/crear-tipopresupuesto.component';
 import { PendientesComponent } from './auth/pendientes/pendientes.component';
 import { CrearPendientesComponent } from './auth/crear-pendientes/crear-pendientes.component';
+import { ConsultarPendientesComponent } from './auth/consultar-pendientes/consultar-pendientes.component';
+import { AnotacionesComponent } from './auth/anotaciones/anotaciones.component';
+import { ConsultarAnotacionesComponent } from './auth/consultar-anotaciones/consultar-anotaciones.component';
+import { CrearAnotacionesComponent } from './auth/crear-anotaciones/crear-anotaciones.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home' },
     { path: 'mantenimiento', component: MantenimientoComponent },
     { path: 'pendientes', component: PendientesComponent },
+    { path: 'anotaciones', component: AnotacionesComponent },
     { path: 'home', component: HomeComponent, pathMatch: 'full' },
     { path: 'crear-tipopago', component: CrearTipopagoComponent, pathMatch: 'full' },
     { path: 'crear-proyectos', component: CrearProyectosComponent, pathMatch: 'full' },
     { path: 'consultar-tipopago', component: ConsultarTipopagoComponent, pathMatch: 'full'},
     { path: 'crear-ingreso', component: CrearIngresoComponent, pathMatch: 'full' },
     { path: 'crear-tipopresupuesto', component: CrearTipopresupuestoComponent, pathMatch: 'full'},
-    { path: 'crear-pendientes', component: CrearPendientesComponent, pathMatch: 'full'}
+    { path: 'crear-pendientes', component: CrearPendientesComponent, pathMatch: 'full'},
+    { path: 'consultar-pendientes', component: ConsultarPendientesComponent, pathMatch: 'full'},
+    { path: 'consultar-anotaciones', component: ConsultarAnotacionesComponent, pathMatch: 'full'},
+    { path: 'crear-anotaciones', component: CrearAnotacionesComponent, pathMatch: 'full'}
    ];
 

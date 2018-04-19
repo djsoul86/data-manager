@@ -5,6 +5,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { Pendiente } from './models/pendiente.model';
 
+
 @Component({
   selector: 'app-crear-pendientes',
   templateUrl: './crear-pendientes.component.html',

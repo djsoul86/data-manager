@@ -14,7 +14,6 @@ export class CrearIngresoComponent implements OnInit {
   descripcion = new FormControl('',[Validators.required]);
   salario = new FormControl('',[Validators.required]);
   value = new FormControl('',[Validators.required]);
-  
   selectedYear:string;
   selectedValue: string;
 
