@@ -31,13 +31,13 @@ export class CrearAnotacionesComponent implements OnInit {
     );
   }
 
-  onSubmitCreate(event:Event,files: FileList){
+  onSubmitCreate(event:Event){
     event.preventDefault();
     this.anotacionObj.Proyecto = this.selectedValue;
     this.anotacionObj.Anotacion = this.anotacion.value;
-    this.anotacionObj.File = this.fileToUpload;
+    // this.anotacionObj.File = this.fileToUpload;
     console.log(this.anotacionObj);
-    // this.crearan_service.create(this.anotacionObj)
+    this.crearan_service.create(this.anotacionObj,this.fileToUpload)
   }
 
   handleFileInput(files: FileList) {

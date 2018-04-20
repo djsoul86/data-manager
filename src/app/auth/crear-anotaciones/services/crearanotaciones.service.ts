@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Anotacion } from '../models/anotacion.model';
 import { MatSnackBar } from '@angular/material';
@@ -7,11 +7,22 @@ import { MatSnackBar } from '@angular/material';
 @Injectable()
 export class CrearanotacionesService {
   apiURL:'http://localhost:49800/';
-  constructor(public httpClient:HttpClient,public snackBar: MatSnackBar) { }
+  constructor(public httpClient:HttpClient,public snackBar: MatSnackBar) { 
+    this.apiURL = 'http://localhost:49800/';
+  }
 
-  create(pendiente: Anotacion): any {
-    const url = `${this.apiURL}/api/ApiPendientes/${pendiente}`;
-    return this.httpClient.put<Anotacion>(url,pendiente).subscribe(
+  
+
+  create(pendiente: Anotacion,archivo:File): any {
+    const url = `${this.apiURL}/api/ApiAnotaciones`;
+    const formData: FormData = new FormData();
+    formData.append('File', archivo, archivo.name);
+    formData.append('Proyecto',pendiente.Proyecto);
+
+    pendiente.File = new FormData();
+    
+    
+    return this.httpClient.post(url,formData).subscribe(
       (data => console.log(data)),
       (err:HttpErrorResponse) =>{
        if(err.error instanceof Error){
@@ -26,7 +37,7 @@ export class CrearanotacionesService {
      } 
      );
   }
-  
+
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,
