@@ -1,0 +1,47 @@
+<h1>Crear Pass</h1>
+<br/>
+<form class="example-form" #createForm="ngForm" (ngSubmit)="onSubmitCreate($event)">
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Proyecto" [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let proy of proyectos" [value]="proy.Nombre">
+                {{ proy.Nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Key" [formControl]="key">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Descripcion" [formControl]="descripcion">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Valor" [formControl]="valor">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="button-row">
+            <button mat-raised-button color="primary">Guardar</button>
+          </div>
+        </td>
+      </tr>
+  </table>
+</form>

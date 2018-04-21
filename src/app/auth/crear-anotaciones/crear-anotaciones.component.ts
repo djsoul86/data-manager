@@ -3,7 +3,7 @@ import { Proyecto } from '../crear-proyectos/models/proyecto.model';
 import { PendientesService } from '../crear-pendientes/services/pendientes.service';
 import { FormControl, Validators } from '@angular/forms';
 import { CrearanotacionesService } from './services/crearanotaciones.service';
-import { Anotacion } from './models/anotacion.model';
+import { Anotaciones } from './models/anotacion.model';
 
 @Component({
   selector: 'app-crear-anotaciones',
@@ -18,7 +18,7 @@ export class CrearAnotacionesComponent implements OnInit {
   anotacion = new FormControl('', [Validators.required]);
   constructor(public pendientes_service: PendientesService
     ,public crearan_service: CrearanotacionesService
-    ,public anotacionObj:Anotacion) { }
+    ,public anotacionObj:Anotaciones) { }
 
   ngOnInit() {
     this.pendientes_service.getAll().subscribe(
@@ -44,10 +44,5 @@ export class CrearAnotacionesComponent implements OnInit {
     console.log(files);
     this.fileToUpload = files.item(0);
   }
-
-  uploadFileToActivity() {
-    this.crearan_service.postFile(this.fileToUpload);
-  }
-
 
 }

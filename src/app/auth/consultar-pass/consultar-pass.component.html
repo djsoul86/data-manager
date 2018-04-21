@@ -18,7 +18,14 @@
       <tr>
         <td>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Anotacion" [formControl]="anotacion">
+            <input matInput placeholder="Descripcion" [formControl]="descripcion">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Key" [formControl]="key">
           </mat-form-field>
         </td>
       </tr>
@@ -44,19 +51,24 @@
     </div>
 
     <mat-table #table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="fechacreacion">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Creacion</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.FechaCreacion | date: "yyyy/MM/dd"}}</mat-cell>
+      <ng-container matColumnDef="proyecto">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Proyecto</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Proyecto}}</mat-cell>
       </ng-container>
 
-      <!-- <ng-container matColumnDef="proyecto">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Proyecto</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.Proyecto}}</mat-cell>
-      </ng-container> -->
+      <ng-container matColumnDef="key">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Key</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Key}}</mat-cell>
+      </ng-container>
 
-      <ng-container matColumnDef="anotacion">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Anotacion</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.Anotacion}}</mat-cell>
+      <ng-container matColumnDef="descripcion">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Descripcion}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="value">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Value</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Value}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="actions">

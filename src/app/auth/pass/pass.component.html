@@ -1,0 +1,11 @@
+<h1>PASS</h1>
+<br/>
+<mat-nav-list>
+  <mat-list-item *ngFor="let link of links">
+      <mat-icon mat-list-icon>lock</mat-icon>
+     <a matLine href="{{ link.url }}">{{ link.id }}</a>
+     <!-- <button mat-icon-button >
+        <mat-icon>info</mat-icon>
+     </button> -->
+  </mat-list-item>
+</mat-nav-list>

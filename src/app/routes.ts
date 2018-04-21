@@ -12,11 +12,15 @@ import { ConsultarPendientesComponent } from './auth/consultar-pendientes/consul
 import { AnotacionesComponent } from './auth/anotaciones/anotaciones.component';
 import { ConsultarAnotacionesComponent } from './auth/consultar-anotaciones/consultar-anotaciones.component';
 import { CrearAnotacionesComponent } from './auth/crear-anotaciones/crear-anotaciones.component';
+import { CrearPassComponent } from './auth/crear-pass/crear-pass.component';
+import { ConsultarPassComponent } from './auth/consultar-pass/consultar-pass.component';
+import { PassComponent } from './auth/pass/pass.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home' },
     { path: 'mantenimiento', component: MantenimientoComponent },
     { path: 'pendientes', component: PendientesComponent },
+    { path: 'pass', component: PassComponent },
     { path: 'anotaciones', component: AnotacionesComponent },
     { path: 'home', component: HomeComponent, pathMatch: 'full' },
     { path: 'crear-tipopago', component: CrearTipopagoComponent, pathMatch: 'full' },
@@ -27,6 +31,8 @@ export const routes: Routes = [
     { path: 'crear-pendientes', component: CrearPendientesComponent, pathMatch: 'full'},
     { path: 'consultar-pendientes', component: ConsultarPendientesComponent, pathMatch: 'full'},
     { path: 'consultar-anotaciones', component: ConsultarAnotacionesComponent, pathMatch: 'full'},
-    { path: 'crear-anotaciones', component: CrearAnotacionesComponent, pathMatch: 'full'}
+    { path: 'crear-anotaciones', component: CrearAnotacionesComponent, pathMatch: 'full'},
+    { path: 'crear-pass', component: CrearPassComponent, pathMatch: 'full'},
+    { path: 'consultar-pass', component: ConsultarPassComponent, pathMatch: 'full'}
    ];
 

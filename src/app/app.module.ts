@@ -54,8 +54,23 @@ import { ConsultarPendientesComponent } from './auth/consultar-pendientes/consul
 import { AnotacionesComponent } from './auth/anotaciones/anotaciones.component';
 import { CrearAnotacionesComponent } from './auth/crear-anotaciones/crear-anotaciones.component';
 import { ConsultarAnotacionesComponent } from './auth/consultar-anotaciones/consultar-anotaciones.component';
-import { Anotacion } from './auth/crear-anotaciones/models/anotacion.model';
+import { Anotaciones } from './auth/crear-anotaciones/models/anotacion.model';
 import { CrearanotacionesService } from './auth/crear-anotaciones/services/crearanotaciones.service';
+import { ConsultarpendientesService } from './auth/consultar-pendientes/services/consultarpendientes.service';
+import { AnotacionesService } from './auth/consultar-anotaciones/servicios/anotaciones.service';
+import { CrearPassComponent } from './auth/crear-pass/crear-pass.component';
+import { ConsultarPassComponent } from './auth/consultar-pass/consultar-pass.component';
+import { PassComponent } from './auth/pass/pass.component';
+import { CrearPassService } from './auth/crear-pass/services/crear-pass.service';
+import { PassModel } from './auth/crear-pass/models/pass.model';
+import { ConsultarPassService } from './auth/consultar-pass/services/consultar-pass.service';
+import { FinancieroComponent } from './auth/financiero/financiero.component';
+import { CrearPagoComponent } from './auth/crear-pago/crear-pago.component';
+import { ConsultarPagoComponent } from './auth/consultar-pago/consultar-pago.component';
+import { VerConsumotarjetasComponent } from './auth/ver-consumotarjetas/ver-consumotarjetas.component';
+import { PresupuestosComponent } from './auth/presupuestos/presupuestos.component';
+import { CrearPresupuestosComponent } from './auth/crear-presupuestos/crear-presupuestos.component';
+import { ConsultarPresupuestosComponent } from './auth/consultar-presupuestos/consultar-presupuestos.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +89,17 @@ import { CrearanotacionesService } from './auth/crear-anotaciones/services/crear
     ConsultarPendientesComponent,
     AnotacionesComponent,
     CrearAnotacionesComponent,
-    ConsultarAnotacionesComponent
+    ConsultarAnotacionesComponent,
+    CrearPassComponent,
+    ConsultarPassComponent,
+    PassComponent,
+    FinancieroComponent,
+    CrearPagoComponent,
+    ConsultarPagoComponent,
+    VerConsumotarjetasComponent,
+    PresupuestosComponent,
+    CrearPresupuestosComponent,
+    ConsultarPresupuestosComponent
   ],
   entryComponents:[
     EditTipopagoComponent,
@@ -108,12 +133,17 @@ import { CrearanotacionesService } from './auth/crear-anotaciones/services/crear
     CreartipoprespuestoService,
     PendientesService,
     CrearanotacionesService,
+    CrearPassService,
+    ConsultarPassService,
+    ConsultarpendientesService,
+    AnotacionesService,
     TipoPago,
     Proyecto,
     Ingreso,
     Pendiente,
-    Anotacion,
+    Anotaciones,
     TiposPresupuesto,
+    PassModel,
     {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
   ],
   bootstrap: [AppComponent]
