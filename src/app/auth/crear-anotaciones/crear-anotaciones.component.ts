@@ -41,7 +41,6 @@ export class CrearAnotacionesComponent implements OnInit {
   }
 
   handleFileInput(files: FileList) {
-    console.log(files);
     this.fileToUpload = files.item(0);
   }
 

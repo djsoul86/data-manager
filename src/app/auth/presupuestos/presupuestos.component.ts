@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { links } from '../mantenimiento/models/links.model';
 
 @Component({
   selector: 'app-presupuestos',
@@ -6,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./presupuestos.component.css']
 })
 export class PresupuestosComponent implements OnInit {
-
-  constructor() { }
-
+  links: links[];
+  constructor() {
+    this.links = [
+      { id: 'Crear Presupuesto', url: '/crear-presupuestos' },
+      { id: 'Consultar Presupuesto', url: '/consultar-presupuestos' }
+    ];
+  }
   ngOnInit() {
   }
 

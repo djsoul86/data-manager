@@ -1,3 +1,82 @@
-<p>
-  crear-pago works!
-</p>
+<h1>Crear Pago</h1>
+<br/>
+<form class="example-form" #createForm="ngForm" (ngSubmit)="onSubmitCreate($event)">
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Tipo Pago" [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let tipo of tipospago" [value]="tipo.Id">
+                {{ tipo.NombrePago }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Nombre" [formControl]="nombre">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Responsable" [(ngModel)]="selectedResp" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let resp of responsables" [value]="resp.Nombre">
+                {{ resp.Nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Valor Pago" [formControl]="valor">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Mes" [(ngModel)]="selectedMonth" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let month of months" [value]="month.val">
+                {{ month.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width" >
+            <input #selectD matInput placeholder="Año" [(ngModel)]="selectedYear" [formControl]="anio" value= "{{test}}">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="form-group">
+            <label for="exampleInputFile">Archivo</label>
+            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" (change)="handleFileInput($event.target.files)">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-checkbox class="example-margin" [formControl]="pagado">Pagado</mat-checkbox>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="button-row">
+            <button mat-raised-button color="primary">Buscar</button>
+          </div>
+        </td>
+      </tr>
+  </table>
+</form>

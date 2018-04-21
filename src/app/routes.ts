@@ -15,6 +15,13 @@ import { CrearAnotacionesComponent } from './auth/crear-anotaciones/crear-anotac
 import { CrearPassComponent } from './auth/crear-pass/crear-pass.component';
 import { ConsultarPassComponent } from './auth/consultar-pass/consultar-pass.component';
 import { PassComponent } from './auth/pass/pass.component';
+import { FinancieroComponent } from './auth/financiero/financiero.component';
+import { ConsultarPagoComponent } from './auth/consultar-pago/consultar-pago.component';
+import { CrearPagoComponent } from './auth/crear-pago/crear-pago.component';
+import { VerConsumotarjetasComponent } from './auth/ver-consumotarjetas/ver-consumotarjetas.component';
+import { PresupuestosComponent } from './auth/presupuestos/presupuestos.component';
+import { CrearPresupuestosComponent } from './auth/crear-presupuestos/crear-presupuestos.component';
+import { ConsultarPresupuestosComponent } from './auth/consultar-presupuestos/consultar-presupuestos.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -22,6 +29,8 @@ export const routes: Routes = [
     { path: 'pendientes', component: PendientesComponent },
     { path: 'pass', component: PassComponent },
     { path: 'anotaciones', component: AnotacionesComponent },
+    { path: 'financiero', component: FinancieroComponent },
+    { path: 'presupuestos', component: PresupuestosComponent, pathMatch: 'full'},
     { path: 'home', component: HomeComponent, pathMatch: 'full' },
     { path: 'crear-tipopago', component: CrearTipopagoComponent, pathMatch: 'full' },
     { path: 'crear-proyectos', component: CrearProyectosComponent, pathMatch: 'full' },
@@ -33,6 +42,11 @@ export const routes: Routes = [
     { path: 'consultar-anotaciones', component: ConsultarAnotacionesComponent, pathMatch: 'full'},
     { path: 'crear-anotaciones', component: CrearAnotacionesComponent, pathMatch: 'full'},
     { path: 'crear-pass', component: CrearPassComponent, pathMatch: 'full'},
-    { path: 'consultar-pass', component: ConsultarPassComponent, pathMatch: 'full'}
+    { path: 'consultar-pass', component: ConsultarPassComponent, pathMatch: 'full'},
+    { path: 'consultar-pago', component: ConsultarPagoComponent, pathMatch: 'full'},
+    { path: 'crear-pago', component: CrearPagoComponent, pathMatch: 'full'},
+    { path: 'ver-consumotarjetas', component: VerConsumotarjetasComponent, pathMatch: 'full'},
+    { path: 'crear-presupuestos', component: CrearPresupuestosComponent, pathMatch: 'full'},
+    { path: 'consultar-presupuestos', component: ConsultarPresupuestosComponent, pathMatch: 'full'}
    ];
 

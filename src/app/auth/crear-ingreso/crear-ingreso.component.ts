@@ -17,11 +17,6 @@ export class CrearIngresoComponent implements OnInit {
   selectedYear:string;
   selectedValue: string;
 
-  foods = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
   months = [
     {val: '1', viewValue: 'Enero'},
     {val: '2', viewValue: 'Febrero'},

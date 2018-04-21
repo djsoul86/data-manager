@@ -71,9 +71,13 @@ import { VerConsumotarjetasComponent } from './auth/ver-consumotarjetas/ver-cons
 import { PresupuestosComponent } from './auth/presupuestos/presupuestos.component';
 import { CrearPresupuestosComponent } from './auth/crear-presupuestos/crear-presupuestos.component';
 import { ConsultarPresupuestosComponent } from './auth/consultar-presupuestos/consultar-presupuestos.component';
+import { PagoModel } from './auth/crear-pago/models/pago.model';
+import { CrearpagoService } from './auth/crear-pago/services/crearpago.service';
+import { DateFormatPipe } from './auth/pipes/DateFormatPipe';
 
 @NgModule({
   declarations: [
+    DateFormatPipe,
     AppComponent,
     HeaderComponent,
     MantenimientoComponent,
@@ -134,6 +138,7 @@ import { ConsultarPresupuestosComponent } from './auth/consultar-presupuestos/co
     PendientesService,
     CrearanotacionesService,
     CrearPassService,
+    CrearpagoService,
     ConsultarPassService,
     ConsultarpendientesService,
     AnotacionesService,
@@ -142,6 +147,7 @@ import { ConsultarPresupuestosComponent } from './auth/consultar-presupuestos/co
     Ingreso,
     Pendiente,
     Anotaciones,
+    PagoModel,
     TiposPresupuesto,
     PassModel,
     {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
