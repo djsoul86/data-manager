@@ -1,3 +1,124 @@
-<p>
-  consultar-pago works!
-</p>
+<h1>Consultar Pagos</h1>
+<br/>
+<form class="example-form" #createForm="ngForm" (ngSubmit)="onSubmitFind($event)">
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Nombre Pago" [formControl]="nombrepago">
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field>
+          <mat-select placeholder="Responsable" [(ngModel)]="selectedResp" [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let resp of responsables" [value]="resp.Nombre">
+              {{ resp.Nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field>
+          <mat-select placeholder="Mes" [(ngModel)]="selectedMonth" [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let month of months" [value]="month.val">
+              {{ month.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field>
+          <mat-select placeholder="Year" [(ngModel)]="selectedYear" [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let year of years" [value]="year.value">
+              {{ year.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="button-row">
+          <button mat-raised-button color="primary">Buscar</button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
+<br/>
+<div #divTabla class="matCustom">
+  <div class="b-table-container mat-elevation-z8">
+    <div class="example-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+      </mat-form-field>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.NombrePago}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="responsable">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Responsable</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Responsable}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="fecha">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Creacion</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Fecha | date: "yyyy/MM/dd"}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="valor">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Valor</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Valor}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="mes">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Mes</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Mes}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="pagado">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Pagado</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-checkbox [checked]="element.Pagado" [disabled]="true">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openDialogToEditTipoPago(element,$event)">
+              Modificar
+            </button>
+            <button mat-menu-item (click)="deleteTipoPago(element,$event)">
+              Eliminar
+            </button>
+            <button mat-menu-item (click)="downloadFile(element,$event)">
+              File
+            </button>
+          </mat-menu>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
+    </mat-paginator>
+  </div>

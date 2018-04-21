@@ -62,7 +62,6 @@ export class CrearPagoComponent implements OnInit {
   
 
   onSubmitCreate(event: Event) {
-
     event.preventDefault();
     this.pag.Mes = +this.selectedMonth;
     this.pag.Responsable = this.selectedResp;

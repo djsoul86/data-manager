@@ -74,6 +74,11 @@ import { ConsultarPresupuestosComponent } from './auth/consultar-presupuestos/co
 import { PagoModel } from './auth/crear-pago/models/pago.model';
 import { CrearpagoService } from './auth/crear-pago/services/crearpago.service';
 import { DateFormatPipe } from './auth/pipes/DateFormatPipe';
+import { ConsultarpagoService } from './auth/consultar-pago/services/consultarpago.service';
+import { EditConsultarpagoComponent } from './auth/consultar-pago/edit-consultarpago/edit-consultarpago.component';
+import { FileService } from './utils/file.service';
+import { InterceptorService } from 'ng2-interceptors';
+
 
 @NgModule({
   declarations: [
@@ -103,10 +108,12 @@ import { DateFormatPipe } from './auth/pipes/DateFormatPipe';
     VerConsumotarjetasComponent,
     PresupuestosComponent,
     CrearPresupuestosComponent,
-    ConsultarPresupuestosComponent
+    ConsultarPresupuestosComponent,
+    EditConsultarpagoComponent
   ],
   entryComponents:[
     EditTipopagoComponent,
+    EditConsultarpagoComponent
   ],
   imports: [
     BrowserModule,
@@ -142,6 +149,8 @@ import { DateFormatPipe } from './auth/pipes/DateFormatPipe';
     ConsultarPassService,
     ConsultarpendientesService,
     AnotacionesService,
+    ConsultarpagoService,
+    FileService,
     TipoPago,
     Proyecto,
     Ingreso,

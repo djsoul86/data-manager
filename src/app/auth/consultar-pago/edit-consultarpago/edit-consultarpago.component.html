@@ -1,0 +1,34 @@
+<form #editForm="ngForm" (ngSubmit)="onSubmit($event)">
+  <div class="b-controls-container">
+    <mat-form-field>
+      <input matInput placeholder="Nombre Pago" [formControl]="nombrepago" [(ngModel)]="tipopago.NombrePago" required>
+      <!-- <mat-error *ngIf="nombrepago.invalid">{{getErrorMessageForName()}}</mat-error> -->
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Responsable" [formControl]="responsable" [(ngModel)]="tipopago.Responsable" required>
+      <!-- <mat-error *ngIf="valor.invalid">{{getErrorMessageForValue()}}</mat-error> -->
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Valor" [formControl]="valor" [(ngModel)]="tipopago.Valor" required>
+      <!-- <mat-error *ngIf="valor.invalid">{{getErrorMessageForValue()}}</mat-error> -->
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Mes" [formControl]="mes" [(ngModel)]="tipopago.Mes" required>
+      <!-- <mat-error *ngIf="valor.invalid">{{getErrorMessageForValue()}}</mat-error> -->
+    </mat-form-field>
+
+    
+    <mat-checkbox [checked]="tipopago.Pagado">Pagado</mat-checkbox>
+    
+
+    <div class="clearfix">
+      <button mat-raised-button color="primary" [disabled]="isBeingSaved">
+        Guardar
+      </button>
+    </div>
+
+  </div>
+</form>

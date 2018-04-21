@@ -22,8 +22,11 @@
   
       
       <ng-container matColumnDef="fijo">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Fijo</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.Fijo}}</mat-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Fijo</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+              <mat-checkbox [checked]="element.Fijo" [disabled]="true">
+              </mat-checkbox>
+            </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="promedio">
