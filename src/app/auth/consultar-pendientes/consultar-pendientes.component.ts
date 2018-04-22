@@ -7,7 +7,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormControl, Validators } from '@angular/forms';
 import { PageEvent, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { MatSelectModule } from '@angular/material/select';
-import { runInThisContext } from 'vm';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -15,6 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './consultar-pendientes.component.html',
   styleUrls: ['./consultar-pendientes.component.css']
 })
+
 export class ConsultarPendientesComponent implements OnInit {
   proyectos: Proyecto[];
   displayedColumns = ['fechacreacion', 'proyecto', 'pendiente', 'requerimiento'];

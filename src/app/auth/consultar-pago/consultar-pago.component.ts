@@ -110,6 +110,6 @@ export class ConsultarPagoComponent implements OnInit {
   }
 
   downloadFile(){
-    this.fileserv.downloadFile('t','t');
+    this.fileserv.downloadFile();
   }
 }
