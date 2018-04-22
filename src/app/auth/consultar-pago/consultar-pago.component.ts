@@ -95,7 +95,6 @@ export class ConsultarPagoComponent implements OnInit {
   }
 
   openDialogToEditTipoPago(tipopago:PagoModel){
-    console.log(tipopago);
     const dialogRef = this.dialog.open(EditConsultarpagoComponent,
       {
         data:tipopago,
@@ -109,7 +108,7 @@ export class ConsultarPagoComponent implements OnInit {
 
   }
 
-  downloadFile(){
-    this.fileserv.downloadFile();
+  downloadFile(tipopago:PagoModel){
+    this.fileserv.downloadFile(tipopago);
   }
 }

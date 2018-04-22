@@ -6,6 +6,6 @@ export class PagoModel{
     Mes:number;
     Responsable:string;
     Year:number;
-    FileName:FormData;
+    FileName:string;
     Pagado:boolean;
 }
