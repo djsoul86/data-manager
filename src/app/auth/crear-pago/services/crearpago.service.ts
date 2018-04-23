@@ -8,41 +8,43 @@ import { PagoModel } from '../models/pago.model';
 @Injectable()
 export class CrearpagoService {
 
-  apiURL:'http://localhost:49800/';
-  constructor(public http:HttpClient,public snackBar: MatSnackBar) { 
+  apiURL: 'http://localhost:49800/';
+  constructor(public http: HttpClient, public snackBar: MatSnackBar) {
     this.apiURL = 'http://localhost:49800/';
   }
 
-  getAll(){
-    const url= `${this.apiURL}/api/ApiFinanciero`;
+  getAll() {
+    const url = `${this.apiURL}/api/ApiFinanciero/obtenerTiposPago`;
     return this.http.get(url);
   }
 
-  create(pago: PagoModel,archivo:File): any {
-    const url = `${this.apiURL}/api/ApiFinanciero`;
+  create(pago: PagoModel, archivo: File): any {
+    const url = `${this.apiURL}/api/ApiFinanciero/guardarPago`;
     const formData: FormData = new FormData();
-    formData.append('File', archivo, archivo.name);
-    formData.append('NombrePago',pago.NombrePago);
-    formData.append('Valor',pago.Valor.toString());
-    formData.append('Mes',pago.Mes.toString());
-    formData.append('Responsable',pago.Responsable);
-    formData.append('Year',String(pago.Year));
-    formData.append('Pagado',String(pago.Pagado));
-   
-    return this.http.post(url,formData).subscribe(
+    if (archivo != null) {
+      formData.append('File', archivo, archivo.name);
+    }
+    formData.append('NombrePago', pago.NombrePago);
+    formData.append('Valor', pago.Valor.toString());
+    formData.append('Mes', pago.Mes.toString());
+    formData.append('Responsable', pago.Responsable);
+    formData.append('Year', String(pago.Year));
+    formData.append('Pagado', String(pago.Pagado));
+
+    return this.http.put(url, formData).subscribe(
       (data => console.log(data)),
-      (err:HttpErrorResponse) =>{
-       if(err.error instanceof Error){
-         console.log('Un error ha ocurrido',err.error.message);
-       }else{
-         console.log(`Backend ha regresado un error ${err.status}, body fue ${err.error}`);
-       }
-     },
-     () => {
-      this.openSnackBar('Se creo el ingreso', 'Guardado');
-       console.log('Todo ha terminado...')
-     } 
-     );
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('Un error ha ocurrido', err.error.message);
+        } else {
+          console.log(`Backend ha regresado un error ${err.status}, body fue ${err.error}`);
+        }
+      },
+      () => {
+        this.openSnackBar('Se creo el ingreso', 'Guardado');
+        console.log('Todo ha terminado...')
+      }
+    );
   }
 
   openSnackBar(message: string, action: string) {

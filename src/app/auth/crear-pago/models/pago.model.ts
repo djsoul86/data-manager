@@ -8,4 +8,5 @@ export class PagoModel{
     Year:number;
     FileName:string;
     Pagado:boolean;
+    extend:boolean;
 }

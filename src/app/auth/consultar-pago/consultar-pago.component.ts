@@ -7,7 +7,7 @@ import { Pendiente } from '../crear-pendientes/models/pendiente.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EditConsultarpagoComponent } from './edit-consultarpago/edit-consultarpago.component';
 import { FileService } from '../../utils/file.service';
-
+import { MatChipsModule } from '@angular/material/chips';
 @Component({
   selector: 'app-consultar-pago',
   templateUrl: './consultar-pago.component.html',
@@ -26,8 +26,8 @@ export class ConsultarPagoComponent implements OnInit {
   @ViewChild('divTabla') divTabla: ElementRef;
 
   length = 50;
-  pageSize = 10;
-  pageSizeOptions = [10, 20, 30];
+  pageSize = 15;
+  pageSizeOptions = [15, 30, 50];
   pageEvent: PageEvent;
   months = [
     { val: '1', viewValue: 'Enero' },
@@ -43,7 +43,7 @@ export class ConsultarPagoComponent implements OnInit {
     { val: '11', viewValue: 'Noviembre' },
     { val: '12', viewValue: 'Diciembre' },
   ];
-
+  isExtendedRow = (index, item) => item.extend;
   years = [
     { value: '2017', viewValue: '2017' },
     { value: '2018', viewValue: '2018' },
@@ -53,23 +53,29 @@ export class ConsultarPagoComponent implements OnInit {
     { Nombre: 'Ernesto' },
     { Nombre: 'Mozart' }
   ];
+
   constructor(public _pago: PagoModel
     , public consultarp_service: ConsultarpagoService
-    ,public fileserv:FileService
-  ,public dialog:MatDialog) { }
+    , public fileserv: FileService
+    , public dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
-  onSubmitFind(event: Event) {
+  onSubmitFind(event: Event, pago: PagoModel) {
     event.preventDefault();
-    this._pago.Mes = +this.selectedMonth;
-    this._pago.Year = +this.selectedYear;
-    this._pago.Responsable = this.selectedResp;
-    this._pago.NombrePago = this.nombrepago.value;
+    if (pago == null) {
+      this._pago.Mes = +this.selectedMonth;
+      this._pago.Year = +this.selectedYear;
+      this._pago.Responsable = this.selectedResp;
+      this._pago.NombrePago = this.nombrepago.value;
+    }else{
+      this._pago = pago;
+    }
     this.consultarp_service.getAll(this._pago).subscribe(
-      (data: any) => {
+      (data: Array<PagoModel>) => {
         if (data.length > 0) {
+          this.setTotales(data);
           this.divTabla.nativeElement.className = '';
           this.dataSource = new MatTableDataSource<PagoModel>(data);
           this.dataSource.paginator = this.paginator;
@@ -90,25 +96,49 @@ export class ConsultarPagoComponent implements OnInit {
 
   }
 
-  editTipoPago(tipopago:PagoModel,event:Event){
+  setTotales(data: Array<PagoModel>) {
+    var bks = new PagoModel();
+    var total = 0;
+    var count = 0;
+    bks.NombrePago = 'Total';
+    bks.extend = true;
+
+    for (var v in data) // for acts as a foreach  
+    {
+      total = total + data[count].Valor;
+      count++;
+    }
+    bks.Valor = total;
+    data.push(bks);
+  }
+
+  editTipoPago(tipopago: PagoModel, event: Event) {
     this.openDialogToEditTipoPago(tipopago);
   }
 
-  openDialogToEditTipoPago(tipopago:PagoModel){
+
+  deleteTipoPago(tipopago: PagoModel, event: Event) {
+    this.consultarp_service.delete(tipopago);
+  }
+
+  openDialogToEditTipoPago(tipopago: PagoModel) {
+    tipopago.Pagado;
     const dialogRef = this.dialog.open(EditConsultarpagoComponent,
       {
-        data:tipopago,
-        height:'400px',
-        width:'600px'
+        data: tipopago,
+        height: '500px',
+        width: '600px'
       });
 
-      dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
-      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
 
   }
 
-  downloadFile(tipopago:PagoModel){
+
+
+  downloadFile(tipopago: PagoModel) {
     this.fileserv.downloadFile(tipopago);
   }
 }

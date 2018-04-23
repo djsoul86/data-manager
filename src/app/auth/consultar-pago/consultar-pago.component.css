@@ -11,3 +11,7 @@
   .matCustom{
     visibility: hidden;
   }
+
+  .darken {
+    background: rgba(0,0,0,0.05);
+  }

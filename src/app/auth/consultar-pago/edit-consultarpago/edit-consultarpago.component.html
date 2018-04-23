@@ -1,7 +1,8 @@
 <form #editForm="ngForm" (ngSubmit)="onSubmit($event)">
   <div class="b-controls-container">
+
     <mat-form-field>
-      <input matInput placeholder="Nombre Pago" [formControl]="nombrepago" [(ngModel)]="tipopago.NombrePago" required>
+      <input matInput placeholder="Nombre Pago" [formControl]="nombrepago" [(ngModel)]="tipopago.NombrePago">
       <!-- <mat-error *ngIf="nombrepago.invalid">{{getErrorMessageForName()}}</mat-error> -->
     </mat-form-field>
 
@@ -20,12 +21,16 @@
       <!-- <mat-error *ngIf="valor.invalid">{{getErrorMessageForValue()}}</mat-error> -->
     </mat-form-field>
 
-    
-    <mat-checkbox [checked]="tipopago.Pagado">Pagado</mat-checkbox>
-    
+    <mat-checkbox class="example-margin" [formControl]="pagado" [(ngModel)]="tipopago.Pagado">Pagado</mat-checkbox>
+
+
+    <div class="form-group">
+      <label for="exampleInputFile">Archivo</label>
+      <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" (change)="handleFileInput($event.target.files)">
+    </div>
 
     <div class="clearfix">
-      <button mat-raised-button color="primary" [disabled]="isBeingSaved">
+      <button mat-raised-button color="primary">
         Guardar
       </button>
     </div>

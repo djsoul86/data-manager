@@ -18,7 +18,7 @@ import { TipoPagoResponse } from './auth/consultar-tipopago/models/tipopago-resp
 
 //Material
 import { CrearTipopagoComponent } from './auth/crear-tipopago/crear-tipopago.component';
-
+import {MatChipsModule} from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MAT_CHECKBOX_CLICK_ACTION
   ,MatButtonModule
@@ -135,7 +135,9 @@ import { InterceptorService } from 'ng2-interceptors';
     MatListModule,
     MatCheckboxModule,
     MatSnackBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatChipsModule
+    
   ],
   providers: [
     ConsultarTipopagoService,

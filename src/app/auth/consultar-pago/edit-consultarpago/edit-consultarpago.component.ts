@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ConsultarpagoService } from '../services/consultarpago.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PagoModel } from '../../crear-pago/models/pago.model';
+import { DISABLED } from '@angular/forms/src/model';
 
 @Component({
   selector: 'app-edit-consultarpago',
@@ -12,16 +13,24 @@ import { PagoModel } from '../../crear-pago/models/pago.model';
 })
 export class EditConsultarpagoComponent implements OnInit {
   isBeingSave = false;
-  nombrepago = new FormControl('',[Validators.required]);
+  nombrepago = new FormControl(this.newMethod());
   responsable = new FormControl('',[Validators.required])
   valor = new FormControl('',[Validators.required])
   mes = new FormControl('',[Validators.required])
   pagado = new FormControl('',[Validators.required])
-
+  fileToUpload: File = null;
   constructor(public dialogRef:MatDialogRef<EditConsultarpagoComponent>
     ,public consultar_pagoservice:ConsultarpagoService
-    ,@Inject(MAT_DIALOG_DATA) public tipopago:any) { }
+    ,@Inject(MAT_DIALOG_DATA) public tipopago:any) { 
+      this.nombrepago.disable();
+      this.responsable.disable();
+      this.mes.disable();
+    }
 
+
+  private newMethod(): any {
+    return { disabled: true };
+  }
 
     getErrorMessageForName(){
       return this.nombrepago.hasError('required') ?
@@ -35,9 +44,9 @@ export class EditConsultarpagoComponent implements OnInit {
 
     onSubmit(event:Event){
       event.preventDefault();
-      // console.log(this.title.value,this.url.value);
+      this.tipopago.Pagado = this.pagado.value;
       this.isBeingSave = true;
-      this.consultar_pagoservice.update(this.tipopago).subscribe(
+      this.consultar_pagoservice.update(this.tipopago,this.fileToUpload).subscribe(
         (data:PagoModel) =>{
          console.log('TipoPago actualizado',data) 
          this.isBeingSave = false;
@@ -54,8 +63,13 @@ export class EditConsultarpagoComponent implements OnInit {
           console.log('Todo ha terminado...')
         }
       );
-    }
 
+
+
+    }
+    handleFileInput(files: FileList) {
+      this.fileToUpload = files.item(0);
+    }
   ngOnInit() {
   }
 
