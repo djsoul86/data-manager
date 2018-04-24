@@ -23,8 +23,7 @@ export class ConsultarPendientesComponent implements OnInit {
   abierto = new FormControl('', [Validators.required]);
   pendiente = new FormControl('', [Validators.required]);
   constructor(public pendientes_service: PendientesService,
-    public _pendiente: Pendiente,
-    public consultarp_service: PendientesService) { }
+    public _pendiente: Pendiente) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -52,7 +51,7 @@ export class ConsultarPendientesComponent implements OnInit {
     this._pendiente.Proyecto = this.selectedValue;
     this._pendiente.Abierto = this.abierto.value;
     this._pendiente.Pendiente = this.pendiente.value;
-    this.consultarp_service.getPendientes(this._pendiente).subscribe(
+    this.pendientes_service.getPendientes(this._pendiente).subscribe(
       (data: any) => {
         if (data.length > 0) {
           this.divTabla.nativeElement.className = '';
@@ -61,7 +60,7 @@ export class ConsultarPendientesComponent implements OnInit {
           this.dataSource.sort = this.sort;
         }else{
           this.divTabla.nativeElement.className = 'matCustom';
-          this.consultarp_service.openSnackBar('No se encontró Informacion','')
+          this.pendientes_service.openSnackBar('No se encontró Informacion','')
         }
       },
       (err: HttpErrorResponse) => {

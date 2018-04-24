@@ -78,6 +78,8 @@ import { ConsultarpagoService } from './auth/consultar-pago/services/consultarpa
 import { EditConsultarpagoComponent } from './auth/consultar-pago/edit-consultarpago/edit-consultarpago.component';
 import { FileService } from './utils/file.service';
 import { InterceptorService } from 'ng2-interceptors';
+import { TCredito } from './auth/ver-consumotarjetas/models/Tcredito.model';
+import { ConsumotcService } from './auth/ver-consumotarjetas/services/consumotc.service';
 
 
 @NgModule({
@@ -152,6 +154,7 @@ import { InterceptorService } from 'ng2-interceptors';
     ConsultarpendientesService,
     AnotacionesService,
     ConsultarpagoService,
+    ConsumotcService,
     FileService,
     TipoPago,
     Proyecto,
@@ -161,6 +164,7 @@ import { InterceptorService } from 'ng2-interceptors';
     PagoModel,
     TiposPresupuesto,
     PassModel,
+    TCredito,
     {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
   ],
   bootstrap: [AppComponent]

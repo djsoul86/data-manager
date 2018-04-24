@@ -1,3 +1,78 @@
-<p>
-  ver-consumotarjetas works!
-</p>
+<h1>Consultar Tarjetas</h1>
+<br/>
+<form class="example-form" #createForm="ngForm" (ngSubmit)="onSubmitFind($event)">
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Tarjeta" [(ngModel)]="selectedCard" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let card of cards" [value]="card.val">
+                {{ card.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Mes" [(ngModel)]="selectedMonth" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let month of months" [value]="month.val">
+                {{ month.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="button-row">
+            <button mat-raised-button color="primary">Buscar</button>
+          </div>
+        </td>
+      </tr>
+  </table>
+</form>
+
+<br/>
+
+
+<div #divTabla class="matCustom">
+  <div class="b-table-container mat-elevation-z8">
+    <div class="example-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+      </mat-form-field>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="tipo">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.TipoTransaccion}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="fecha">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.FechaTransaccion|date: "yyyy-MM-dd"}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="descripcion">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.Descripcion}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="valor">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Valor</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.Valor}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-row *matRowDef="let row; columns: ['tipo','fecha','descripcion','valor']; when: isExtendedRow" class="darken"></mat-row>
+    </mat-table>
+
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
+    </mat-paginator>
+  </div>
