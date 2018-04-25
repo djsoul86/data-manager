@@ -80,6 +80,7 @@ import { FileService } from './utils/file.service';
 import { InterceptorService } from 'ng2-interceptors';
 import { TCredito } from './auth/ver-consumotarjetas/models/Tcredito.model';
 import { ConsumotcService } from './auth/ver-consumotarjetas/services/consumotc.service';
+import { FilterUtil } from './utils/filter.util';
 
 
 @NgModule({
@@ -127,12 +128,12 @@ import { ConsumotcService } from './auth/ver-consumotarjetas/services/consumotc.
     ReactiveFormsModule,
     //Material
     MatInputModule,
+    MatTableModule,
     MatSortModule,
     MatMenuModule,
     MatIconModule,
     MatDialogModule,
     MatButtonModule,
-    MatTableModule,
     MatPaginatorModule,
     MatListModule,
     MatCheckboxModule,
@@ -165,6 +166,7 @@ import { ConsumotcService } from './auth/ver-consumotarjetas/services/consumotc.
     TiposPresupuesto,
     PassModel,
     TCredito,
+    FilterUtil,
     {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
   ],
   bootstrap: [AppComponent]

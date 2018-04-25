@@ -80,7 +80,7 @@ export class ConsultarPagoComponent implements OnInit {
           this.dataSource = new MatTableDataSource<PagoModel>(data);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-        } else {
+       } else {
           this.divTabla.nativeElement.className = 'matCustom';
           this.consultarp_service.openSnackBar('No se encontró Informacion', '')
         }
@@ -136,7 +136,11 @@ export class ConsultarPagoComponent implements OnInit {
 
   }
 
-
+  applyFilter(filterValue:string){
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLocaleLowerCase();
+    this.dataSource.filter = filterValue;
+  }
 
   downloadFile(tipopago: PagoModel) {
     this.fileserv.downloadFile(tipopago);

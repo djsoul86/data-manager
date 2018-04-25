@@ -43,7 +43,7 @@
       </mat-form-field>
     </div>
 
-    <mat-table #table [dataSource]="dataSource" matSort>
+    <mat-table #table (matSortChange)="sortData($event)" [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="fechacreacion">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Creacion</mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.FechaCreacion | date: "yyyy/MM/dd"}}</mat-cell>
@@ -66,10 +66,10 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="openDialogToEditTipoPago(element,$event)">
+            <!-- <button mat-menu-item (click)="openDialogToEditTipoPago(element,$event)">
               Modificar
-            </button>
-            <button mat-menu-item (click)="deleteTipoPago(element,$event)">
+            </button> -->
+            <button mat-menu-item (click)="deleteAnotacion(element,$event)">
               Eliminar
             </button>
           </mat-menu>

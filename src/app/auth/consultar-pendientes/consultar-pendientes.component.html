@@ -48,7 +48,7 @@
       </mat-form-field>
     </div>
 
-    <mat-table #table [dataSource]="dataSource" matSort>
+    <mat-table #table (matSortChange)="sortData($event)" [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="fechacreacion">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Creacion</mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.FechaCreacion | date: "yyyy/MM/dd"}}</mat-cell>

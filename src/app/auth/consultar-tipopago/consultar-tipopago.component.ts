@@ -1,10 +1,11 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild, Output, EventEmitter } from '@angular/core';
 import { ConsultarTipopagoService } from './services/consultar-tipopago.service';
 import {TipoPagoResponse} from '../consultar-tipopago/models/tipopago-response.model';
 import { TipoPago } from './models/tipopago-model';
-import { MatTableDataSource,MatPaginator,MatSort, MatDialog, PageEvent } from '@angular/material';
+import { MatTableDataSource,MatPaginator,MatSort, MatDialog, PageEvent, Sort } from '@angular/material';
 import { EditTipopagoComponent } from './edit-tipopago/edit-tipopago.component';
 import { Observable } from 'rxjs/Observable';
+import { FilterUtil } from '../../utils/filter.util';
 
 @Component({
   selector: 'app-consultar-tipopago',
@@ -17,23 +18,21 @@ export class ConsultarTipopagoComponent implements OnInit {
   dataSource;
   @ViewChild(MatPaginator) paginator:MatPaginator;
   @ViewChild(MatSort) sort:MatSort;
-
   length = 50;
   pageSize = 5;
   pageSizeOptions = [5, 10, 20];
   pageEvent:PageEvent;
-  
+  sortedData;
+
   applyFilter(filterValue:string){
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLocaleLowerCase();
-    this.dataSource.filter = filterValue;
+    this.dataSource.filter = this.utils.applyFilter(filterValue,this.dataSource);
   }
 
   setPageSizeOptions(setPageSizeOptionsInput:string){
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
   constructor(public consultartipopagoservice:ConsultarTipopagoService
-    ,public dialog:MatDialog) { }
+    ,public dialog:MatDialog,public utils:FilterUtil) { }
 
 
   editTipoPago(tipopago:TipoPago,event:Event){
@@ -41,7 +40,6 @@ export class ConsultarTipopagoComponent implements OnInit {
   }
 
   openDialogToEditTipoPago(tipopago:TipoPago){
-    console.log(tipopago);
     const dialogRef = this.dialog.open(EditTipopagoComponent,
       {
         data:tipopago,
@@ -54,15 +52,37 @@ export class ConsultarTipopagoComponent implements OnInit {
       });
 
   }
+  sortData(sort: Sort) {
+    const data = this.tipopago.slice();
+    if (!sort.active || sort.direction == '') {
+      this.sortedData = data;
+      return;
+    }
+    this.dataSource = data.sort((a, b) => {
+      let isAsc = sort.direction == 'asc';
+      switch (sort.active) {
+        case 'id': return this.compare(a.Id, b.Id, isAsc);
+        case 'nombrepago': return this.compare(a.NombrePago, b.NombrePago, isAsc);
+        case 'valor': return this.compare(a.Valor, b.Valor, isAsc);
+        case 'promedio': return this.compare(a.Promedio, b.Promedio, isAsc);
+        default: return 0;
+      }
+    });
+  }
 
+  compare(a, b, isAsc) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
   refreshDataTable(tipop:Observable<any>){
     tipop.subscribe(
       (data:any) =>
     {
       this.tipopago = data;
-      this.dataSource = new MatTableDataSource<TipoPago>(data);
+      this.sortedData = this.tipopago.slice();
+      this.dataSource = new MatTableDataSource<TipoPago>(this.tipopago);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+            
     },
     error=>{
       console.error(error);

@@ -5,9 +5,10 @@ import { Proyecto } from '../crear-proyectos/models/proyecto.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormControl, Validators } from '@angular/forms';
-import { PageEvent, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { PageEvent, MatPaginator, MatSort, MatTableDataSource, Sort } from '@angular/material';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FilterUtil } from '../../utils/filter.util';
 
 @Component({
   selector: 'app-consultar-pendientes',
@@ -17,13 +18,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export class ConsultarPendientesComponent implements OnInit {
   proyectos: Proyecto[];
+  pendientes: Array<Pendiente>;
   displayedColumns = ['fechacreacion', 'proyecto', 'pendiente', 'requerimiento'];
   dataSource;
   selectedValue: string;
   abierto = new FormControl('', [Validators.required]);
   pendiente = new FormControl('', [Validators.required]);
   constructor(public pendientes_service: PendientesService,
-    public _pendiente: Pendiente) { }
+    public _pendiente: Pendiente,public utils:FilterUtil) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -33,7 +35,7 @@ export class ConsultarPendientesComponent implements OnInit {
   pageSize = 5;
   pageSizeOptions = [5, 10, 20];
   pageEvent: PageEvent;
-
+  sortedData;
 
   ngOnInit() {
     this.pendientes_service.getAll().subscribe(
@@ -45,6 +47,9 @@ export class ConsultarPendientesComponent implements OnInit {
       }
     );
   }
+  applyFilter(filterValue:string){
+    this.dataSource.filter = this.utils.applyFilter(filterValue,this.dataSource);
+  }
 
   onSubmitFind(event: Event) {
     event.preventDefault();
@@ -54,6 +59,7 @@ export class ConsultarPendientesComponent implements OnInit {
     this.pendientes_service.getPendientes(this._pendiente).subscribe(
       (data: any) => {
         if (data.length > 0) {
+          this.pendientes = data;
           this.divTabla.nativeElement.className = '';
           this.dataSource = new MatTableDataSource<Pendiente>(data);
           this.dataSource.paginator = this.paginator;
@@ -71,6 +77,28 @@ export class ConsultarPendientesComponent implements OnInit {
         }
       }
     );
+  }
+
+  sortData(sort: Sort) {
+    const data = this.pendientes.slice();
+    if (!sort.active || sort.direction == '') {
+      this.sortedData = data;
+      return;
+    }
+    this.dataSource = data.sort((a, b) => {
+      let isAsc = sort.direction == 'asc';
+      switch (sort.active) {
+        case 'fechacreacion': return this.compare(a.FechaCreacion, b.FechaCreacion, isAsc);
+        case 'proyecto': return this.compare(a.Proyecto, b.Proyecto, isAsc);
+        case 'pendiente': return this.compare(a.Pendiente, b.Pendiente, isAsc);
+        case 'requerimiento': return this.compare(a.Requerimiento, b.Requerimiento, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+  compare(a, b, isAsc) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
 }
