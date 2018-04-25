@@ -1,11 +1,12 @@
-import { Component, OnInit,ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ConsultarTipopagoService } from './services/consultar-tipopago.service';
-import {TipoPagoResponse} from '../consultar-tipopago/models/tipopago-response.model';
+import { TipoPagoResponse } from '../consultar-tipopago/models/tipopago-response.model';
 import { TipoPago } from './models/tipopago-model';
-import { MatTableDataSource,MatPaginator,MatSort, MatDialog, PageEvent, Sort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog, PageEvent, Sort, MatSnackBar } from '@angular/material';
 import { EditTipopagoComponent } from './edit-tipopago/edit-tipopago.component';
 import { Observable } from 'rxjs/Observable';
 import { FilterUtil } from '../../utils/filter.util';
+import { SnackBarUtil } from '../../utils/snackBar.util';
 
 @Component({
   selector: 'app-consultar-tipopago',
@@ -13,43 +14,45 @@ import { FilterUtil } from '../../utils/filter.util';
   styleUrls: ['./consultar-tipopago.component.css']
 })
 export class ConsultarTipopagoComponent implements OnInit {
-  tipopago:Array<TipoPago>;
-  displayedColumns = ['id','nombrepago','fijo','valor','promedio','actions'];
+  tipopago: Array<TipoPago>;
+  displayedColumns = ['id', 'nombrepago', 'fijo', 'valor', 'promedio', 'actions'];
   dataSource;
-  @ViewChild(MatPaginator) paginator:MatPaginator;
-  @ViewChild(MatSort) sort:MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   length = 50;
   pageSize = 5;
   pageSizeOptions = [5, 10, 20];
-  pageEvent:PageEvent;
+  pageEvent: PageEvent;
   sortedData;
 
-  applyFilter(filterValue:string){
-    this.dataSource.filter = this.utils.applyFilter(filterValue,this.dataSource);
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = this.utils.applyFilter(filterValue, this.dataSource);
   }
 
-  setPageSizeOptions(setPageSizeOptionsInput:string){
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
-  constructor(public consultartipopagoservice:ConsultarTipopagoService
-    ,public dialog:MatDialog,public utils:FilterUtil) { }
+  constructor(public consultartipopagoservice: ConsultarTipopagoService
+    , public dialog: MatDialog
+    , public utils: FilterUtil
+    , public snackBar: SnackBarUtil) { }
 
 
-  editTipoPago(tipopago:TipoPago,event:Event){
+  editTipoPago(tipopago: TipoPago, event: Event) {
     this.openDialogToEditTipoPago(tipopago);
   }
 
-  openDialogToEditTipoPago(tipopago:TipoPago){
+  openDialogToEditTipoPago(tipopago: TipoPago) {
     const dialogRef = this.dialog.open(EditTipopagoComponent,
       {
-        data:tipopago,
-        height:'400px',
-        width:'600px'
+        data: tipopago,
+        height: '400px',
+        width: '600px'
       });
 
-      dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
-      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
 
   }
   sortData(sort: Sort) {
@@ -73,24 +76,22 @@ export class ConsultarTipopagoComponent implements OnInit {
   compare(a, b, isAsc) {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
-  refreshDataTable(tipop:Observable<any>){
+  refreshDataTable(tipop: Observable<any>) {
     tipop.subscribe(
-      (data:any) =>
-    {
-      this.tipopago = data;
-      this.sortedData = this.tipopago.slice();
-      this.dataSource = new MatTableDataSource<TipoPago>(this.tipopago);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-            
-    },
-    error=>{
-      console.error(error);
-    }
-  );
+      (data: any) => {
+        this.tipopago = data;
+        this.sortedData = this.tipopago.slice();
+        this.dataSource = new MatTableDataSource<TipoPago>(this.tipopago);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error => {
+        console.error(error);
+      }
+    );
   }
 
-  deleteTipoPago(tipopago:TipoPago){
+  deleteTipoPago(tipopago: TipoPago) {
     this.refreshDataTable(this.consultartipopagoservice.delete(tipopago));
   }
 

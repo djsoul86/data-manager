@@ -61,15 +61,15 @@
       </mat-form-field>
     </div>
 
-    <mat-table #table [dataSource]="dataSource" matSort>
+    <mat-table #table (matSortChange)="sortData($event)" [dataSource]="dataSource" matSort>
 
       <ng-container matColumnDef="nombre">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.NombrePago}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="responsable">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Responsable</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Responsable</mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.Responsable}}</mat-cell>
       </ng-container>
 
@@ -84,12 +84,12 @@
       </ng-container>
 
       <ng-container matColumnDef="mes">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Mes</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Mes</mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.Mes}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="pagado">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Pagado</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Pagado</mat-header-cell>
         <mat-cell *matCellDef="let element">
           <mat-checkbox [checked]="element.Pagado" [disabled]="true">
           </mat-checkbox>

@@ -1,4 +1,4 @@
-<h1>Consultar Anotacion</h1>
+<h1>Consultar Pass</h1>
 <br/>
 <form class="example-form" #createForm="ngForm" (ngSubmit)="onSubmitFind($event)">
 
@@ -78,10 +78,10 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="openDialogToEditTipoPago(element,$event)">
+            <button mat-menu-item (click)="openDialogToEditPass(element,$event)">
               Modificar
             </button>
-            <button mat-menu-item (click)="deleteTipoPago(element,$event)">
+            <button mat-menu-item (click)="deletePass(element,$event)">
               Eliminar
             </button>
           </mat-menu>

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { PassModel } from '../models/pass.model';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material';
+import { SnackBarUtil } from '../../../utils/snackBar.util';
+import { AppSettings } from '../../../config/AppSettings';
+import { AppSettingServiceService } from '../../../config/app-setting-service.service';
 
 @Injectable()
 export class CrearPassService {
@@ -18,20 +20,21 @@ export class CrearPassService {
        }
      },
      () => {
-      this.openSnackBar('Se creo el ingreso', 'Guardado');
+       this.snack.openSnackBar('Se creo el ingreso', 'Guardado');
        console.log('Todo ha terminado...')
      } 
      );
   }
   
-  apiURL:'http://localhost:49800/';
-  constructor(public http:HttpClient,public snackBar: MatSnackBar) { 
-    this.apiURL = 'http://localhost:49800/';
-  }
-
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
+  apiURL: string;
+  private settings: AppSettings;
+  constructor(public http: HttpClient
+    , public appSettingsService: AppSettingServiceService
+    , public snack: SnackBarUtil) {
+    this.appSettingsService.getSettings().subscribe(settings => this.settings = settings,
+      () => null,
+      () => {
+        this.apiURL = this.settings.defaultUrl;
+      });
   }
 }

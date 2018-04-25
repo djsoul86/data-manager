@@ -33,7 +33,8 @@ import { MAT_CHECKBOX_CLICK_ACTION
   ,MatListModule
   ,MatCheckboxModule
   ,MatSnackBarModule
-  ,MatSelectModule} from '@angular/material';
+  ,MatSelectModule,
+  MAT_SNACK_BAR_DATA} from '@angular/material';
 import { ConsultarTipopagoComponent } from './auth/consultar-tipopago/consultar-tipopago.component';
 import { EditTipopagoComponent } from './auth/consultar-tipopago/edit-tipopago/edit-tipopago.component';
 import { TipoPago } from './auth/consultar-tipopago/models/tipopago-model';
@@ -81,6 +82,9 @@ import { InterceptorService } from 'ng2-interceptors';
 import { TCredito } from './auth/ver-consumotarjetas/models/Tcredito.model';
 import { ConsumotcService } from './auth/ver-consumotarjetas/services/consumotc.service';
 import { FilterUtil } from './utils/filter.util';
+import { SnackBarUtil } from './utils/snackBar.util';
+import { AppSettings } from './config/AppSettings';
+import { AppSettingServiceService } from './config/app-setting-service.service';
 
 
 @NgModule({
@@ -156,6 +160,7 @@ import { FilterUtil } from './utils/filter.util';
     AnotacionesService,
     ConsultarpagoService,
     ConsumotcService,
+    AppSettingServiceService,
     FileService,
     TipoPago,
     Proyecto,
@@ -166,7 +171,11 @@ import { FilterUtil } from './utils/filter.util';
     TiposPresupuesto,
     PassModel,
     TCredito,
+    SnackBarUtil,
+    // SnackBarUtil,
+    AppSettings,
     FilterUtil,
+    {provide: MAT_SNACK_BAR_DATA,useValue:''},
     {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
   ],
   bootstrap: [AppComponent]

@@ -3,14 +3,21 @@ import { PagoModel } from '../../crear-pago/models/pago.model';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { SimpleSnackBar, MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
+import { AppSettings } from '../../../config/AppSettings';
+import { AppSettingServiceService } from '../../../config/app-setting-service.service';
 
 @Injectable()
 export class ConsultarpagoService {
 
-  apiURL: 'http://localhost:49800/';
-
-  constructor(public http: HttpClient, public snackBar: MatSnackBar) {
-    this.apiURL = 'http://localhost:49800/';
+  apiURL:string;
+  private settings: AppSettings;
+  constructor(public http:HttpClient
+    ,public appSettingsService:AppSettingServiceService) { 
+    this.appSettingsService.getSettings().subscribe(settings=> this.settings = settings,
+      () => null,
+      () => {
+        this.apiURL = this.settings.defaultUrl;
+      });
   }
 
   getAll(pendiente: PagoModel): Observable<any> {
@@ -35,29 +42,10 @@ export class ConsultarpagoService {
     return this.http.put(url, formData);
   }
 
-  delete(model: PagoModel) {
-    console.log(model);
-    const url = `${this.apiURL}/api/ApiFinanciero/${model.Id}`;
-    return this.http.delete(url).subscribe(
-      (data: PagoModel) => {
-        console.log('Pago eliminado', data)
-      },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log('Un error ha ocurrido', err.error.message);
-        } else {
-          console.log(`Backend ha regresado un error ${err.status}, body fue ${err.error}`);
-        }
-      },
-      () => {
-        console.log('Todo ha terminado...')
-      }
-    );;
+  delete(model: PagoModel):Observable<any> {
+    const url = `${this.apiURL}/api/ApiFinanciero/eliminarPago/${model}`;
+    return this.http.post<PagoModel>(url,model);
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
-  }
+  
 }

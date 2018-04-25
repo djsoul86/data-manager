@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { Proyecto } from '../../crear-proyectos/models/proyecto.model';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material';
 import { Pendiente } from '../models/pendiente.model';
+import { SnackBarUtil } from '../../../utils/snackBar.util';
+import { AppSettings } from '../../../config/AppSettings';
+import { AppSettingServiceService } from '../../../config/app-setting-service.service';
 
 @Injectable()
 export class PendientesService {
@@ -20,15 +22,22 @@ export class PendientesService {
        }
      },
      () => {
-      this.openSnackBar('Se creo el ingreso', 'Guardado');
+       this.snack.openSnackBar('Se creo el ingreso', 'Guardado');
        console.log('Todo ha terminado...')
      } 
      );
   }
   
-  apiURL:'http://localhost:49800/';
-  constructor(public http:HttpClient,public snackBar: MatSnackBar) { 
-    this.apiURL = 'http://localhost:49800/';
+  apiURL: string;
+  private settings: AppSettings;
+  constructor(public http: HttpClient
+    , public appSettingsService: AppSettingServiceService
+    , public snack: SnackBarUtil) {
+    this.appSettingsService.getSettings().subscribe(settings => this.settings = settings,
+      () => null,
+      () => {
+        this.apiURL = this.settings.defaultUrl;
+      });
   }
 
   getAll():Observable<Proyecto>{
@@ -40,11 +49,5 @@ export class PendientesService {
     const url = `${this.apiURL}/api/ApiPendientes/${value}`;
     return this.http.post<Pendiente>(url,value);
   }
-
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
-  }
-  
+ 
 }

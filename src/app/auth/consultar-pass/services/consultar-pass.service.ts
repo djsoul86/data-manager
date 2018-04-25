@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PassModel } from '../../crear-pass/models/pass.model';
+import { AppSettings } from '../../../config/AppSettings';
+import { AppSettingServiceService } from '../../../config/app-setting-service.service';
 
 @Injectable()
 export class ConsultarPassService {
-  apiURL: 'http://localhost:49800/';
-
-  constructor(public http: HttpClient) {
-    this.apiURL = 'http://localhost:49800/';
+  apiURL:string;
+  private settings: AppSettings;
+  constructor(public http:HttpClient
+    ,public appSettingsService:AppSettingServiceService) { 
+    this.appSettingsService.getSettings().subscribe(settings=> this.settings = settings,
+      () => null,
+      () => {
+        this.apiURL = this.settings.defaultUrl;
+      });
   }
 
   getAll(pass: PassModel) {

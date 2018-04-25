@@ -3,12 +3,20 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { TipoPago } from '../models/tipopago-model';
 import { TipoPagoResponse } from '../models/tipopago-response.model';
+import { AppSettingServiceService } from '../../../config/app-setting-service.service';
+import { AppSettings } from '../../../config/AppSettings';
 
 @Injectable()
 export class ConsultarTipopagoService {
-  apiURL:'http://localhost:49800/';
-  constructor(public http:HttpClient) { 
-    this.apiURL = 'http://localhost:49800/';
+  apiURL:string;
+  private settings: AppSettings;
+  constructor(public http:HttpClient
+    ,public appSettingsService:AppSettingServiceService) { 
+    this.appSettingsService.getSettings().subscribe(settings=> this.settings = settings,
+      () => null,
+      () => {
+        this.apiURL = this.settings.defaultUrl;
+      });
   }
 
   getAll():Observable<TipoPagoResponse>{

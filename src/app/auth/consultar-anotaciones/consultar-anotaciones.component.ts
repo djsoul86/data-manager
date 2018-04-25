@@ -8,6 +8,7 @@ import { Anotaciones } from '../crear-anotaciones/models/anotacion.model';
 import { AnotacionesService } from './servicios/anotaciones.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FilterUtil } from '../../utils/filter.util';
+import { SnackBarUtil } from '../../utils/snackBar.util';
 
 @Component({
   selector: 'app-consultar-anotaciones',
@@ -23,7 +24,10 @@ export class ConsultarAnotacionesComponent implements OnInit {
   selectedValue: string;
   anotacion = new FormControl('', [Validators.required]);
   constructor(public pendientes_service: PendientesService,
-    public anotacionObj: Anotaciones,public anotacion_service:AnotacionesService,public utils:FilterUtil) { }
+    public anotacionObj: Anotaciones
+    ,public anotacion_service:AnotacionesService
+    ,public snack:SnackBarUtil
+    ,public utils:FilterUtil) { }
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -63,7 +67,7 @@ export class ConsultarAnotacionesComponent implements OnInit {
           this.dataSource.sort = this.sort;
         }else{
           this.divTabla.nativeElement.className = 'matCustom';
-          this.pendientes_service.openSnackBar('No se encontró Informacion','')
+          this.snack.openSnackBar('No se encontró Informacion','')
         }
       },
       (err: HttpErrorResponse) => {

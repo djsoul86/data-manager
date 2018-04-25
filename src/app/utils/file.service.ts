@@ -5,7 +5,6 @@ import { InterceptorService } from 'ng2-interceptors';
 import 'rxjs/Rx';
 
 // import { ConfigService } from 'app/common/services/config.service';
-import { getFileNameFromResponseContentDisposition, saveFile } from './file-download-helper';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { PagoModel } from '../auth/crear-pago/models/pago.model';
 import { MatSnackBar } from '@angular/material';

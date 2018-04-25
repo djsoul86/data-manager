@@ -9,6 +9,7 @@ import { PageEvent, MatPaginator, MatSort, MatTableDataSource, Sort } from '@ang
 import { MatSelectModule } from '@angular/material/select';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FilterUtil } from '../../utils/filter.util';
+import { SnackBarUtil } from '../../utils/snackBar.util';
 
 @Component({
   selector: 'app-consultar-pendientes',
@@ -24,8 +25,10 @@ export class ConsultarPendientesComponent implements OnInit {
   selectedValue: string;
   abierto = new FormControl('', [Validators.required]);
   pendiente = new FormControl('', [Validators.required]);
-  constructor(public pendientes_service: PendientesService,
-    public _pendiente: Pendiente,public utils:FilterUtil) { }
+  constructor(public pendientes_service: PendientesService
+    ,public _pendiente: Pendiente
+    ,public utils:FilterUtil
+    ,public snack:SnackBarUtil) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -66,7 +69,7 @@ export class ConsultarPendientesComponent implements OnInit {
           this.dataSource.sort = this.sort;
         }else{
           this.divTabla.nativeElement.className = 'matCustom';
-          this.pendientes_service.openSnackBar('No se encontró Informacion','')
+          this.snack.openSnackBar('No se encontró Informacion','')
         }
       },
       (err: HttpErrorResponse) => {

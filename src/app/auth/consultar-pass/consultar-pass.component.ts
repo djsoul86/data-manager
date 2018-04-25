@@ -6,6 +6,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { PassModel } from '../crear-pass/models/pass.model';
 import { ConsultarPassService } from './services/consultar-pass.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SnackBarUtil } from '../../utils/snackBar.util';
 
 @Component({
   selector: 'app-consultar-pass',
@@ -19,9 +20,10 @@ export class ConsultarPassComponent implements OnInit {
   selectedValue: string;
   key = new FormControl('', [Validators.required]);
   descripcion = new FormControl('', [Validators.required]);
-  // value = new FormControl('', [Validators.required]);
-  constructor(public pendientes_service: PendientesService,
-    public _pass:PassModel,public consultarp_service:ConsultarPassService) { }
+  constructor(public pendientes_service: PendientesService
+    , public _pass: PassModel
+    , public consultarp_service: ConsultarPassService
+    , public snack:SnackBarUtil) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -58,7 +60,7 @@ export class ConsultarPassComponent implements OnInit {
           this.dataSource.sort = this.sort;
         } else {
           this.divTabla.nativeElement.className = 'matCustom';
-          this.pendientes_service.openSnackBar('No se encontró Informacion', '')
+          this.snack.openSnackBar('No se encontró Informacion', '')
         }
       },
       (err: HttpErrorResponse) => {

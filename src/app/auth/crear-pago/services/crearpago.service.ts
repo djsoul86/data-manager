@@ -4,13 +4,23 @@ import { MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { TipoPago } from '../../consultar-tipopago/models/tipopago-model';
 import { PagoModel } from '../models/pago.model';
+import { SnackBarUtil } from '../../../utils/snackBar.util';
+import { AppSettings } from '../../../config/AppSettings';
+import { AppSettingServiceService } from '../../../config/app-setting-service.service';
 
 @Injectable()
 export class CrearpagoService {
 
-  apiURL: 'http://localhost:49800/';
-  constructor(public http: HttpClient, public snackBar: MatSnackBar) {
-    this.apiURL = 'http://localhost:49800/';
+  apiURL: string;
+  private settings: AppSettings;
+  constructor(public http: HttpClient
+    , public appSettingsService: AppSettingServiceService
+    , public snack: SnackBarUtil) {
+    this.appSettingsService.getSettings().subscribe(settings => this.settings = settings,
+      () => null,
+      () => {
+        this.apiURL = this.settings.defaultUrl;
+      });
   }
 
   getAll() {
@@ -41,15 +51,10 @@ export class CrearpagoService {
         }
       },
       () => {
-        this.openSnackBar('Se creo el ingreso', 'Guardado');
+        this.snack.openSnackBar('Se creo el ingreso', 'Guardado');
         console.log('Todo ha terminado...')
       }
     );
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
-  }
 }
