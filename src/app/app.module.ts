@@ -34,7 +34,8 @@ import { MAT_CHECKBOX_CLICK_ACTION
   ,MatCheckboxModule
   ,MatSnackBarModule
   ,MatSelectModule,
-  MAT_SNACK_BAR_DATA} from '@angular/material';
+  MAT_SNACK_BAR_DATA,
+  MatExpansionModule} from '@angular/material';
 import { ConsultarTipopagoComponent } from './auth/consultar-tipopago/consultar-tipopago.component';
 import { EditTipopagoComponent } from './auth/consultar-tipopago/edit-tipopago/edit-tipopago.component';
 import { TipoPago } from './auth/consultar-tipopago/models/tipopago-model';
@@ -85,6 +86,8 @@ import { FilterUtil } from './utils/filter.util';
 import { SnackBarUtil } from './utils/snackBar.util';
 import { AppSettings } from './config/AppSettings';
 import { AppSettingServiceService } from './config/app-setting-service.service';
+import { CargararchivosComponent } from './auth/cargararchivos/cargararchivos.component';
+import { ServiceService } from './auth/cargararchivos/services/service.service';
 
 
 @NgModule({
@@ -116,7 +119,8 @@ import { AppSettingServiceService } from './config/app-setting-service.service';
     PresupuestosComponent,
     CrearPresupuestosComponent,
     ConsultarPresupuestosComponent,
-    EditConsultarpagoComponent
+    EditConsultarpagoComponent,
+    CargararchivosComponent
   ],
   entryComponents:[
     EditTipopagoComponent,
@@ -143,7 +147,8 @@ import { AppSettingServiceService } from './config/app-setting-service.service';
     MatCheckboxModule,
     MatSnackBarModule,
     MatSelectModule,
-    MatChipsModule
+    MatChipsModule,
+    MatExpansionModule
     
   ],
   providers: [
@@ -161,6 +166,7 @@ import { AppSettingServiceService } from './config/app-setting-service.service';
     ConsultarpagoService,
     ConsumotcService,
     AppSettingServiceService,
+    ServiceService,
     FileService,
     TipoPago,
     Proyecto,

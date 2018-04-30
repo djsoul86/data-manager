@@ -1,66 +1,73 @@
 <h1>Consultar Pagos</h1>
 <br/>
-<form class="example-form" #createForm="ngForm" (ngSubmit)="onSubmitFind($event)">
 
-  <table class="example-full-width" cellspacing="0">
-    <tr>
-      <td>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Nombre Pago" [formControl]="nombrepago">
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <mat-form-field>
-          <mat-select placeholder="Responsable" [(ngModel)]="selectedResp" [ngModelOptions]="{standalone: true}">
-            <mat-option *ngFor="let resp of responsables" [value]="resp.Nombre">
-              {{ resp.Nombre }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <mat-form-field>
-          <mat-select placeholder="Mes" [(ngModel)]="selectedMonth" [ngModelOptions]="{standalone: true}">
-            <mat-option *ngFor="let month of months" [value]="month.val">
-              {{ month.viewValue }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <mat-form-field>
-          <mat-select placeholder="Year" [(ngModel)]="selectedYear" [ngModelOptions]="{standalone: true}">
-            <mat-option *ngFor="let year of years" [value]="year.value">
-              {{ year.viewValue }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <div class="button-row">
-          <button mat-raised-button color="primary">Buscar</button>
-        </div>
-      </td>
-    </tr>
-  </table>
-</form>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Busqueda
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+    <form class="example-form" #createForm="ngForm" (ngSubmit)="onSubmitFind($event)">
+
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Nombre Pago" [formControl]="nombrepago">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <mat-select placeholder="Responsable" [(ngModel)]="selectedResp" [ngModelOptions]="{standalone: true}">
+                <mat-option *ngFor="let resp of responsables" [value]="resp.Nombre">
+                  {{ resp.Nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <mat-select placeholder="Mes" [(ngModel)]="selectedMonth" [ngModelOptions]="{standalone: true}">
+                <mat-option *ngFor="let month of months" [value]="month.val">
+                  {{ month.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <mat-select placeholder="Year" [(ngModel)]="selectedYear" [ngModelOptions]="{standalone: true}">
+                <mat-option *ngFor="let year of years" [value]="year.value">
+                  {{ year.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="button-row">
+              <button mat-raised-button color="primary">Buscar</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>
+
 <br/>
 <div #divTabla class="matCustom">
   <div class="b-table-container mat-elevation-z8">
-    <div class="example-header">
-      <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
-      </mat-form-field>
-    </div>
-
+    
     <mat-table #table (matSortChange)="sortData($event)" [dataSource]="dataSource" matSort>
 
       <ng-container matColumnDef="nombre">

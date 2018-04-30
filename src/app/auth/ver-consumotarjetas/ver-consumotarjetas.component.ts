@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { TCredito } from './models/Tcredito.model';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, Sort } from '@angular/material';
 import { ConsumotcService } from './services/consumotc.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SnackBarUtil } from '../../utils/snackBar.util';
 
 @Component({
   selector: 'app-ver-consumotarjetas',
@@ -15,15 +16,23 @@ export class VerConsumotarjetasComponent implements OnInit {
   dataSource;
   selectedCard: string;
   selectedMonth: string;
+  selectedYear:string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('divTabla') divTabla: ElementRef;
-
-
+  sortedData;
+  pagos: Array<TCredito>;
   cards = [
     { val: '1', viewValue: 'Visa' },
-    { val: '2', viewValue: 'Master' }
+    { val: '2', viewValue: 'Master' },
+    { val: '3', viewValue: 'Citi' }
+  ];
+
+  years = [
+    { val: '1', viewValue: '2017' },
+    { val: '2', viewValue: '2018' },
+    { val: '3', viewValue: '2019' }
   ];
 
   months = [
@@ -42,6 +51,7 @@ export class VerConsumotarjetasComponent implements OnInit {
   ];
   constructor(public consumot_service: ConsumotcService
     , private tarjeta: TCredito
+    , private snack: SnackBarUtil
   ) { }
   isExtendedRow = (index, item) => item.extend;
   ngOnInit() {
@@ -51,10 +61,11 @@ export class VerConsumotarjetasComponent implements OnInit {
     event.preventDefault();
     this.tarjeta.Mes = +this.selectedMonth;
     this.tarjeta.IdTarjeta = this.selectedCard;
+    this.tarjeta.Year = +this.selectedYear;
     this.consumot_service.getAll(this.tarjeta).subscribe(
       (data: any) => {
-        console.log(data);
         if (data.length > 0) {
+          this.pagos = data;
           this.setTotales(data);
           this.divTabla.nativeElement.className = '';
           this.dataSource = new MatTableDataSource<TCredito>(data);
@@ -62,7 +73,7 @@ export class VerConsumotarjetasComponent implements OnInit {
           this.dataSource.sort = this.sort;
         } else {
           this.divTabla.nativeElement.className = 'matCustom';
-          this.consumot_service.openSnackBar('No se encontró Informacion', '')
+          this.snack.openSnackBar('No se encontró Informacion', '')
         }
       },
       (err: HttpErrorResponse) => {
@@ -85,9 +96,9 @@ export class VerConsumotarjetasComponent implements OnInit {
     tCredito.TipoTransaccion = 'Total Pagado:';
     tCredito.extend = true;
 
-    for (var v in data) // for acts as a foreach  
+    for (var v in data) 
     {
-      console.log(data[count].TipoTransaccion);
+      
       if (data[count].TipoTransaccion == 'Débito') {
         totDeb = totDeb + data[count].Valor;
       }else{
@@ -99,6 +110,39 @@ export class VerConsumotarjetasComponent implements OnInit {
     tCredito.Valor = totCred;
     data.push(tDebito);
     data.push(tCredito);
+  }
+
+  sortData(sort: Sort) {
+    const data = this.pagos.slice();
+    var rest = data[data.length - 1];
+    var tot = data[data.length - 2];
+    var index = data.indexOf(rest, 0);
+    var indext = data.indexOf(tot, 0);
+    if (index > -1) {
+      data.splice(index, 1);
+    }
+    
+    if (indext > -1) {
+      data.splice(indext, 1);
+    }
+    if (!sort.active || sort.direction == '') {
+      this.sortedData = data;
+      return;
+    }
+    this.dataSource = data.sort((a, b) => {
+      let isAsc = sort.direction == 'asc';
+      switch (sort.active) {
+        case 'tipo': return this.compare(a.TipoTransaccion, b.TipoTransaccion, isAsc);
+        case 'fecha': return this.compare(a.FechaTransaccion, b.FechaTransaccion, isAsc);
+        case 'valor': return this.compare(a.Valor, b.Valor, isAsc);
+        default: return 0;
+      }
+    });
+    this.dataSource.push(tot);
+    this.dataSource.push(rest);
+  }
+  compare(a, b, isAsc) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
 }

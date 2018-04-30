@@ -9,13 +9,14 @@ import { EditConsultarpagoComponent } from './edit-consultarpago/edit-consultarp
 import { FileService } from '../../utils/file.service';
 import { MatChipsModule } from '@angular/material/chips';
 import { SnackBarUtil } from '../../utils/snackBar.util';
+import {MatExpansionModule} from '@angular/material/expansion';
 @Component({
   selector: 'app-consultar-pago',
   templateUrl: './consultar-pago.component.html',
   styleUrls: ['./consultar-pago.component.css']
 })
 export class ConsultarPagoComponent implements OnInit {
-  nombrepago = new FormControl('', [Validators.required]);
+  nombrepago = new FormControl('');
   selectedYear: string;
   selectedMonth: string;
   selectedResp: string;

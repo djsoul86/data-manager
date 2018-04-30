@@ -22,7 +22,7 @@ export class ConsultarAnotacionesComponent implements OnInit {
   sortedData;
   anotaciones: Array<Anotaciones>;
   selectedValue: string;
-  anotacion = new FormControl('', [Validators.required]);
+  anotacion = new FormControl('');
   constructor(public pendientes_service: PendientesService,
     public anotacionObj: Anotaciones
     ,public anotacion_service:AnotacionesService

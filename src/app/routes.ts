@@ -22,6 +22,7 @@ import { VerConsumotarjetasComponent } from './auth/ver-consumotarjetas/ver-cons
 import { PresupuestosComponent } from './auth/presupuestos/presupuestos.component';
 import { CrearPresupuestosComponent } from './auth/crear-presupuestos/crear-presupuestos.component';
 import { ConsultarPresupuestosComponent } from './auth/consultar-presupuestos/consultar-presupuestos.component';
+import { CargararchivosComponent } from './auth/cargararchivos/cargararchivos.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -47,6 +48,7 @@ export const routes: Routes = [
     { path: 'crear-pago', component: CrearPagoComponent, pathMatch: 'full'},
     { path: 'ver-consumotarjetas', component: VerConsumotarjetasComponent, pathMatch: 'full'},
     { path: 'crear-presupuestos', component: CrearPresupuestosComponent, pathMatch: 'full'},
-    { path: 'consultar-presupuestos', component: ConsultarPresupuestosComponent, pathMatch: 'full'}
+    { path: 'consultar-presupuestos', component: ConsultarPresupuestosComponent, pathMatch: 'full'},
+    { path: 'cargararchivos', component: CargararchivosComponent, pathMatch: 'full'}
    ];
 

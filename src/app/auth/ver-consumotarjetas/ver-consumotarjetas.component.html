@@ -28,6 +28,17 @@
       </tr>
       <tr>
         <td>
+          <mat-form-field>
+            <mat-select placeholder="Año" [(ngModel)]="selectedYear" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let year of years" [value]="year.viewValue">
+                {{ year.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <div class="button-row">
             <button mat-raised-button color="primary">Buscar</button>
           </div>
@@ -47,7 +58,7 @@
       </mat-form-field>
     </div>
 
-    <mat-table #table [dataSource]="dataSource" matSort>
+    <mat-table #table (matSortChange)="sortData($event)" [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="tipo">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.TipoTransaccion}}</mat-cell>
@@ -59,7 +70,7 @@
       </ng-container>
 
       <ng-container matColumnDef="descripcion">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Descripcion</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.Descripcion}}</mat-cell>
       </ng-container>
 
