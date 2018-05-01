@@ -10,8 +10,7 @@ export class PresupuestosComponent implements OnInit {
   links: links[];
   constructor() {
     this.links = [
-      { id: 'Crear Presupuesto', url: '/crear-presupuestos' },
-      { id: 'Consultar Presupuesto', url: '/consultar-presupuestos' }
+      { id: 'Crear Presupuesto', url: '/crear-presupuestos' }
     ];
   }
   ngOnInit() {

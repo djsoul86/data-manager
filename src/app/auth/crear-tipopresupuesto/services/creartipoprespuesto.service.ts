@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material';
 import { AppSettings } from '../../../config/AppSettings';
 import { AppSettingServiceService } from '../../../config/app-setting-service.service';
 import { SnackBarUtil } from '../../../utils/snackBar.util';
+import { PresupuestoModel } from '../../crear-presupuestos/models/presupuesto.model';
 
 @Injectable()
 export class CreartipoprespuestoService {
@@ -38,6 +39,21 @@ export class CreartipoprespuestoService {
         console.log('Todo ha terminado...')
       }
     );
+  }
+
+  getAll():Observable<TiposPresupuesto>{
+    const url= `${this.apiURL}/api/ApiPresupuestos`;
+    return this.http.get<TiposPresupuesto>(url);
+  }
+
+  crearPresupuesto(presup:PresupuestoModel){
+    const url = `${this.apiURL}/api/ApiPresupuestos/obtenerPresupuesto/${presup}`;
+    return this.http.post(url, presup);
+  }
+
+  eliminarPresupuesto(model:PresupuestoModel):Observable<any> {
+    const url = `${this.apiURL}/api/ApiPresupuestos/eliminarPresupuesto/${model}`;
+    return this.http.post<PresupuestoModel>(url,model);
   }
 
 }

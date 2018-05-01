@@ -88,6 +88,7 @@ import { AppSettings } from './config/AppSettings';
 import { AppSettingServiceService } from './config/app-setting-service.service';
 import { CargararchivosComponent } from './auth/cargararchivos/cargararchivos.component';
 import { ServiceService } from './auth/cargararchivos/services/service.service';
+import { PresupuestoModel } from './auth/crear-presupuestos/models/presupuesto.model';
 
 
 @NgModule({
@@ -178,6 +179,7 @@ import { ServiceService } from './auth/cargararchivos/services/service.service';
     PassModel,
     TCredito,
     SnackBarUtil,
+    PresupuestoModel,
     // SnackBarUtil,
     AppSettings,
     FilterUtil,

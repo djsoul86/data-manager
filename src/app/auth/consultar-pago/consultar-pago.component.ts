@@ -9,7 +9,7 @@ import { EditConsultarpagoComponent } from './edit-consultarpago/edit-consultarp
 import { FileService } from '../../utils/file.service';
 import { MatChipsModule } from '@angular/material/chips';
 import { SnackBarUtil } from '../../utils/snackBar.util';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 @Component({
   selector: 'app-consultar-pago',
   templateUrl: './consultar-pago.component.html',
@@ -92,6 +92,8 @@ export class ConsultarPagoComponent implements OnInit {
     );
 
   }
+
+
 
   refreshDataTable(data: any) {
     if (data.pagos.length > 0) {
