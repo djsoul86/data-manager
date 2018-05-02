@@ -5,6 +5,7 @@ import { ConsultarpagoService } from '../services/consultarpago.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PagoModel } from '../../crear-pago/models/pago.model';
 import { DISABLED } from '@angular/forms/src/model';
+import { SnackBarUtil } from '../../../utils/snackBar.util';
 
 @Component({
   selector: 'app-edit-consultarpago',
@@ -21,6 +22,7 @@ export class EditConsultarpagoComponent implements OnInit {
   fileToUpload: File = null;
   constructor(public dialogRef:MatDialogRef<EditConsultarpagoComponent>
     ,public consultar_pagoservice:ConsultarpagoService
+    ,public snack:SnackBarUtil
     ,@Inject(MAT_DIALOG_DATA) public tipopago:any) { 
       this.nombrepago.disable();
       this.responsable.disable();
@@ -48,7 +50,7 @@ export class EditConsultarpagoComponent implements OnInit {
       this.isBeingSave = true;
       this.consultar_pagoservice.update(this.tipopago,this.fileToUpload).subscribe(
         (data:PagoModel) =>{
-         console.log('TipoPago actualizado',data) 
+         this.snack.openSnackBar('Se actualizó el pago','')
          this.isBeingSave = false;
          this.dialogRef.close();
         },

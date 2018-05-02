@@ -52,11 +52,11 @@
 
 <div #divTabla class="matCustom">
   <div class="b-table-container mat-elevation-z8">
-    <div class="example-header">
+    <!-- <div class="example-header">
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
       </mat-form-field>
-    </div>
+    </div> -->
 
     <mat-table #table (matSortChange)="sortData($event)" [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="tipo">

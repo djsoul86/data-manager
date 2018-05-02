@@ -8,20 +8,31 @@ import 'rxjs/Rx';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { PagoModel } from '../auth/crear-pago/models/pago.model';
 import { MatSnackBar } from '@angular/material';
+import { AppSettings } from '../config/AppSettings';
+import { AppSettingServiceService } from '../config/app-setting-service.service';
 
 @Injectable()
 export class FileService {
+  apiURL:string;
+  private settings: AppSettings;
   constructor(
     // private config: ConfigService,
     private http: HttpClient,
     public snackBar: MatSnackBar
-  ) { }
+    ,public appSettingsService:AppSettingServiceService
+  ) { 
+    this.appSettingsService.getSettings().subscribe(settings=> this.settings = settings,
+      () => null,
+      () => {
+        this.apiURL = this.settings.defaultUrl;
+      });
+  }
 
   downloadFile(tipopago: PagoModel) {
     if (tipopago.FileName != null) {
       var splitted = tipopago.FileName.split("\\");
       return this.http
-        .get('http://localhost:49800/api/ApiFinanciero/obtenerImagen', {
+        .get(`${this.apiURL}/api/ApiFinanciero/obtenerImagen`, {
           responseType: "blob",
           params: new HttpParams().set('file', tipopago.FileName)
         })

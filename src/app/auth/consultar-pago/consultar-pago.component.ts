@@ -66,18 +66,15 @@ export class ConsultarPagoComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmitFind(event: Event, pago: PagoModel) {
+  onSubmitFind(event: Event) {
     if (event != null) {
       event.preventDefault();
     }
-    if (pago == null) {
       this._pago.Mes = +this.selectedMonth;
       this._pago.Year = +this.selectedYear;
       this._pago.Responsable = this.selectedResp;
       this._pago.NombrePago = this.nombrepago.value;
-    } else {
-      this._pago = pago;
-    }
+    
     this.consultarp_service.getAll(this._pago).subscribe(
       (data: any) => {
         this.refreshDataTable(data);

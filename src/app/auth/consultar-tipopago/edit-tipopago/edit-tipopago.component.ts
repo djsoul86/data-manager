@@ -11,7 +11,7 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./edit-tipopago.component.css']
 })
 export class EditTipopagoComponent implements OnInit {
-  isBeingSave = false;
+  isBeingSaved = false;
   nombrepago = new FormControl('',[Validators.required]);
   valor = new FormControl('',[Validators.required])
   promedio = new FormControl('',[Validators.required])
@@ -35,11 +35,11 @@ export class EditTipopagoComponent implements OnInit {
     onSubmit(event:Event){
       event.preventDefault();
       // console.log(this.title.value,this.url.value);
-      this.isBeingSave = true;
+      this.isBeingSaved = true;
       this.consultartipopago_service.update(this.tipopago).subscribe(
         (data:TipoPago) =>{
          console.log('TipoPago actualizado',data) 
-         this.isBeingSave = false;
+         this.isBeingSaved = false;
          this.dialogRef.close();
         },
         (err:HttpErrorResponse) =>{
