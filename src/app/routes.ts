@@ -23,32 +23,37 @@ import { PresupuestosComponent } from './auth/presupuestos/presupuestos.componen
 import { CrearPresupuestosComponent } from './auth/crear-presupuestos/crear-presupuestos.component';
 import { ConsultarPresupuestosComponent } from './auth/consultar-presupuestos/consultar-presupuestos.component';
 import { CargararchivosComponent } from './auth/cargararchivos/cargararchivos.component';
+import { AuthGuard } from './common/guards/auth.guard';
+import { PublicGuard } from  './common/guards/public.guard';
+import { LoginComponent } from './public/login/login.component';
 
 export const routes: Routes = [
+    { path: '', pathMatch: 'full', redirectTo: '/login' },
     { path: '', pathMatch: 'full', redirectTo: '/home' },
-    { path: 'mantenimiento', component: MantenimientoComponent },
-    { path: 'pendientes', component: PendientesComponent },
-    { path: 'pass', component: PassComponent },
-    { path: 'anotaciones', component: AnotacionesComponent },
-    { path: 'financiero', component: FinancieroComponent },
-    { path: 'presupuestos', component: PresupuestosComponent, pathMatch: 'full'},
-    { path: 'home', component: HomeComponent, pathMatch: 'full' },
-    { path: 'crear-tipopago', component: CrearTipopagoComponent, pathMatch: 'full' },
-    { path: 'crear-proyectos', component: CrearProyectosComponent, pathMatch: 'full' },
-    { path: 'consultar-tipopago', component: ConsultarTipopagoComponent, pathMatch: 'full'},
-    { path: 'crear-ingreso', component: CrearIngresoComponent, pathMatch: 'full' },
-    { path: 'crear-tipopresupuesto', component: CrearTipopresupuestoComponent, pathMatch: 'full'},
-    { path: 'crear-pendientes', component: CrearPendientesComponent, pathMatch: 'full'},
-    { path: 'consultar-pendientes', component: ConsultarPendientesComponent, pathMatch: 'full'},
-    { path: 'consultar-anotaciones', component: ConsultarAnotacionesComponent, pathMatch: 'full'},
-    { path: 'crear-anotaciones', component: CrearAnotacionesComponent, pathMatch: 'full'},
-    { path: 'crear-pass', component: CrearPassComponent, pathMatch: 'full'},
-    { path: 'consultar-pass', component: ConsultarPassComponent, pathMatch: 'full'},
-    { path: 'consultar-pago', component: ConsultarPagoComponent, pathMatch: 'full'},
-    { path: 'crear-pago', component: CrearPagoComponent, pathMatch: 'full'},
-    { path: 'ver-consumotarjetas', component: VerConsumotarjetasComponent, pathMatch: 'full'},
-    { path: 'crear-presupuestos', component: CrearPresupuestosComponent, pathMatch: 'full'},
-    { path: 'consultar-presupuestos', component: ConsultarPresupuestosComponent, pathMatch: 'full'},
-    { path: 'cargararchivos', component: CargararchivosComponent, pathMatch: 'full'}
-   ];
+    { path: 'login', component: LoginComponent, pathMatch: 'full', canActivate: [ PublicGuard ] },
+    { path: 'mantenimiento', component: MantenimientoComponent,pathMatch:'full',canActivate:[AuthGuard] },
+    { path: 'pendientes', component: PendientesComponent,pathMatch:'full',canActivate:[AuthGuard] },
+    { path: 'pass', component: PassComponent,pathMatch:'full',canActivate:[AuthGuard] },
+    { path: 'anotaciones', component: AnotacionesComponent,pathMatch:'full',canActivate:[AuthGuard] },
+    { path: 'financiero', component: FinancieroComponent,pathMatch:'full',canActivate:[AuthGuard] },
+    { path: 'presupuestos', component: PresupuestosComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'home', component: HomeComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'crear-tipopago', component: CrearTipopagoComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'crear-proyectos', component: CrearProyectosComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'consultar-tipopago', component: ConsultarTipopagoComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'crear-ingreso', component: CrearIngresoComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'crear-tipopresupuesto', component: CrearTipopresupuestoComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'crear-pendientes', component: CrearPendientesComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'consultar-pendientes', component: ConsultarPendientesComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'consultar-anotaciones', component: ConsultarAnotacionesComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'crear-anotaciones', component: CrearAnotacionesComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'crear-pass', component: CrearPassComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'consultar-pass', component: ConsultarPassComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'consultar-pago', component: ConsultarPagoComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'crear-pago', component: CrearPagoComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'ver-consumotarjetas', component: VerConsumotarjetasComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'crear-presupuestos', component: CrearPresupuestosComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'consultar-presupuestos', component: ConsultarPresupuestosComponent, pathMatch: 'full',canActivate:[AuthGuard] },
+    { path: 'cargararchivos', component: CargararchivosComponent, pathMatch: 'full',canActivate:[AuthGuard] }
+];
 

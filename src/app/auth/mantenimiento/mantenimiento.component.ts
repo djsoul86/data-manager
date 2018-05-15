@@ -21,7 +21,9 @@ export class MantenimientoComponent implements OnInit {
     { id:'Proyectos', url:'/crear-proyectos'},
     { id:'Cargar Archivo', url:'/cargararchivos'},
     { id:'Crear Ingreso', url:'/crear-ingreso'},
-    { id:'Tipo Presupuesto', url:'/crear-tipopresupuesto'}];
+    { id:'Tipo Presupuesto', url:'/crear-tipopresupuesto'},
+    { id:'Cargar Spotify', url:'/cargarspotify'}
+  ];
 
   }
 

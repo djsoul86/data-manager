@@ -5,7 +5,7 @@ import { MatPaginator, MatSort, MatTableDataSource, Sort, PageEvent } from '@ang
 import { ConsumotcService } from './services/consumotc.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SnackBarUtil } from '../../utils/snackBar.util';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-ver-consumotarjetas',
   templateUrl: './ver-consumotarjetas.component.html',
@@ -21,12 +21,17 @@ export class VerConsumotarjetasComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('divTabla') divTabla: ElementRef;
+  // @ViewChild('progress') progress: ElementRef;
+
   length = 50;
   pageSize = 5;
   pageSizeOptions = [5, 10, 20];
   pageEvent: PageEvent;
   sortedData;
   pagos: Array<TCredito>;
+  color = 'primary';
+  mode = 'determinate';
+  value = 50;
   cards = [
     { val: '1', viewValue: 'Visa' },
     { val: '2', viewValue: 'Master' },
@@ -56,7 +61,11 @@ export class VerConsumotarjetasComponent implements OnInit {
   constructor(public consumot_service: ConsumotcService
     , private tarjeta: TCredito
     , private snack: SnackBarUtil
-  ) { }
+  ) {
+    this.color = 'primary';
+    this.mode = 'indeterminate';
+    this.value = 50;
+   }
   isExtendedRow = (index, item) => item.extend;
   ngOnInit() {
   }
@@ -66,8 +75,11 @@ export class VerConsumotarjetasComponent implements OnInit {
     this.tarjeta.Mes = +this.selectedMonth;
     this.tarjeta.IdTarjeta = this.selectedCard;
     this.tarjeta.Year = +this.selectedYear;
+    // console.log(this.progress);
+    // this.progress.nativeElement.className = 'progress-view';
     this.consumot_service.getAll(this.tarjeta).subscribe(
       (data: any) => {
+        // this.progress.nativeElement.className = 'example-margin';
         if (data.length > 0) {
           this.pagos = data;
           this.setTotales(data);

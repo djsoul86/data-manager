@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {routes} from './routes';
 import { RouterModule } from '@angular/router'; 
@@ -10,6 +10,7 @@ import { MantenimientoComponent } from './auth/mantenimiento/mantenimiento.compo
 import { HomeComponent } from './auth/home/home.component';
 import {ConsultarTipopagoService} from './auth/consultar-tipopago/services/consultar-tipopago.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TokenInterceptor } from './auth/interceptors/token.interceptor';
 
 //Models
 import { TipoPagoResponse } from './auth/consultar-tipopago/models/tipopago-response.model';
@@ -35,7 +36,8 @@ import { MAT_CHECKBOX_CLICK_ACTION
   ,MatSnackBarModule
   ,MatSelectModule,
   MAT_SNACK_BAR_DATA,
-  MatExpansionModule} from '@angular/material';
+  MatExpansionModule,
+  MatProgressSpinnerModule} from '@angular/material';
 import { ConsultarTipopagoComponent } from './auth/consultar-tipopago/consultar-tipopago.component';
 import { EditTipopagoComponent } from './auth/consultar-tipopago/edit-tipopago/edit-tipopago.component';
 import { TipoPago } from './auth/consultar-tipopago/models/tipopago-model';
@@ -89,6 +91,12 @@ import { AppSettingServiceService } from './config/app-setting-service.service';
 import { CargararchivosComponent } from './auth/cargararchivos/cargararchivos.component';
 import { ServiceService } from './auth/cargararchivos/services/service.service';
 import { PresupuestoModel } from './auth/crear-presupuestos/models/presupuesto.model';
+import { AuthenticationService } from './common/services/authentication.service';
+import { AuthGuard } from './common/guards/auth.guard';
+import { PublicGuard } from './common/guards/public.guard';
+import { LoginComponent } from './public/login/login.component';
+import { SessionStorageService } from 'ngx-webstorage';
+import { Users } from './common/models/Users';
 
 
 @NgModule({
@@ -121,7 +129,8 @@ import { PresupuestoModel } from './auth/crear-presupuestos/models/presupuesto.m
     CrearPresupuestosComponent,
     ConsultarPresupuestosComponent,
     EditConsultarpagoComponent,
-    CargararchivosComponent
+    CargararchivosComponent,
+    LoginComponent
   ],
   entryComponents:[
     EditTipopagoComponent,
@@ -149,7 +158,8 @@ import { PresupuestoModel } from './auth/crear-presupuestos/models/presupuesto.m
     MatSnackBarModule,
     MatSelectModule,
     MatChipsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule
     
   ],
   providers: [
@@ -178,13 +188,19 @@ import { PresupuestoModel } from './auth/crear-presupuestos/models/presupuesto.m
     TiposPresupuesto,
     PassModel,
     TCredito,
+    Users,
     SnackBarUtil,
     PresupuestoModel,
+    SessionStorageService,
     // SnackBarUtil,
     AppSettings,
     FilterUtil,
+    AuthenticationService,
+    AuthGuard,
+    PublicGuard,
     {provide: MAT_SNACK_BAR_DATA,useValue:''},
-    {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
+    {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'},
+    {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
 })
