@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   username = new FormControl('',[Validators.required])
   password = new FormControl('',[Validators.required])
+  hidePassword = true;
   constructor(public authService:AuthenticationService
     ,public locker:SessionStorageService
     ,public router:Router) { 

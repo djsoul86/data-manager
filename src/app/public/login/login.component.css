@@ -1,0 +1,43 @@
+.b-controls-container {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+  }
+  
+  .b-controls-container > * {
+    width: 100%;
+  }
+  
+  .b-spinner {
+    text-align: center;
+  }
+  
+  .clearfix {
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+
+  .div-central{
+      padding-top: 50px;
+      padding-left: 300px;
+  }
+
+  /* .bord-form{
+      border: 1px;
+      border: solid;
+  } */
+  
+  .b-image {
+    font-size: 66px;
+    color: #2780E3;
+    font-weight: bold;
+    padding-top: 40px;
+    display: inline-block;
+    margin-bottom: 40px;
+  }
+  
+  .b-submit {
+    margin-top: 20px;
+  
+  }
+  

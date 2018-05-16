@@ -5,9 +5,6 @@ import { AppSettingServiceService } from '../../config/app-setting-service.servi
 import { AppSettings } from '../../config/AppSettings';
 import { Users } from '../models/Users';
 
-// import { Config } from '../config';
-
-
 @Injectable()
 export class AuthenticationService  {
   hasSession = false;
@@ -35,14 +32,9 @@ export class AuthenticationService  {
   }
 
   public logIn (username: string, password: string) {
-    console.log(this.apiURL);
     const url = `${this.apiURL}/api/Login`;
     this.users.Email = username;
     this.users.password = password;
-    // return this._http.post(url, {
-    //   'username': username,
-    //   'password': password
-    // });
     return this._http.post(url,this.users);
   }
 

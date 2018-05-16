@@ -21,6 +21,7 @@ export class ConsultarTipopagoService {
 
   getAll():Observable<TipoPagoResponse>{
     const url= `${this.apiURL}/api/ApiRequest`;
+    console.log('consultando tipo pago' + url)
     return this.http.get<TipoPagoResponse>(url);
   }
 

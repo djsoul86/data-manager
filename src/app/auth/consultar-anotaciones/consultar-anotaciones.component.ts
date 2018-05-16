@@ -59,7 +59,7 @@ export class ConsultarAnotacionesComponent implements OnInit {
     this.anotacionObj.Anotacion = this.anotacion.value;
     this.anotacion_service.getAll(this.anotacionObj).subscribe(
       (data: any) => {
-        if (data.length > 0) {
+       if (data.length != undefined && data.length > 0) {
           this.anotaciones = data;
           this.divTabla.nativeElement.className = '';
           this.dataSource = new MatTableDataSource<Pendiente>(data);

@@ -20,7 +20,7 @@ export class AnotacionesService {
 
   getAll(anotaciones: Anotaciones) {
     const url = `${this.apiURL}/api/ApiAnotaciones/obtenerPorId/${anotaciones}`;
-    return this.http.post(url, anotaciones);
+    return this.http.post(url,anotaciones);
   };
 
   delete(model: Anotaciones) {
