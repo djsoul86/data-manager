@@ -1,0 +1,30 @@
+<form #editForm="ngForm" (ngSubmit)="onSubmit($event)">
+  <div class="b-controls-container">
+
+    <mat-form-field>
+      <input matInput placeholder="TrackName" [formControl]="trackname" [(ngModel)]="spot.TrackName" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Artist" [formControl]="artist" [(ngModel)]="spot.Artist" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="PlayList" [formControl]="playlist" [(ngModel)]="spot.PlayList" required>
+    </mat-form-field>
+
+    <mat-checkbox class="example-margin" [formControl]="descargada" [(ngModel)]="spot.Descargada">Descargada</mat-checkbox>
+
+    <div class="form-group">
+      <label for="exampleInputFile">Archivo</label>
+      <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" (change)="handleFileInput($event.target.files)">
+    </div>
+
+    <div class="clearfix">
+      <button mat-raised-button color="primary">
+        Guardar
+      </button>
+    </div>
+
+  </div>
+</form>

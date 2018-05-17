@@ -97,6 +97,10 @@ import { PublicGuard } from './common/guards/public.guard';
 import { LoginComponent } from './public/login/login.component';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Users } from './common/models/Users';
+import { SpotifyComponent } from './auth/spotify/spotify.component';
+import { SpotifyService } from './auth/spotify/services/spotify.service';
+import { Spotify } from './auth/spotify/models/spotify.model';
+import { EditSpotifyComponent } from './auth/spotify/edit-spotify/edit-spotify.component';
 
 
 @NgModule({
@@ -130,11 +134,14 @@ import { Users } from './common/models/Users';
     ConsultarPresupuestosComponent,
     EditConsultarpagoComponent,
     CargararchivosComponent,
-    LoginComponent
+    LoginComponent,
+    SpotifyComponent,
+    EditSpotifyComponent
   ],
   entryComponents:[
     EditTipopagoComponent,
-    EditConsultarpagoComponent
+    EditConsultarpagoComponent,
+    EditSpotifyComponent
   ],
   imports: [
     BrowserModule,
@@ -192,9 +199,10 @@ import { Users } from './common/models/Users';
     SnackBarUtil,
     PresupuestoModel,
     SessionStorageService,
-    // SnackBarUtil,
+    SpotifyService,
     AppSettings,
     FilterUtil,
+    Spotify,
     AuthenticationService,
     AuthGuard,
     PublicGuard,

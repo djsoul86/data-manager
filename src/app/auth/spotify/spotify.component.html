@@ -1,0 +1,88 @@
+<h1>Consultar Musica</h1>
+<br/>
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Busqueda
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+    <form class="example-form" #createForm="ngForm" (ngSubmit)="onSubmitFind($event)">
+
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field>
+              <mat-select placeholder="PlayList" [(ngModel)]="selectedResp" [ngModelOptions]="{standalone: true}">
+                <mat-option *ngFor="let play of playlist" [value]="play.Nombre">
+                  {{ play.Nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="button-row">
+              <button mat-raised-button color="primary">Buscar</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<br/>
+
+<div #divTabla class="matCustom">
+  <div class="b-table-container mat-elevation-z8">
+
+    <mat-table #table (matSortChange)="sortData($event)" [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="trackname">
+        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.TrackName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="artist">
+        <mat-header-cell *matHeaderCellDef>Artista</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Artist}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="descargada">
+        <mat-header-cell *matHeaderCellDef>Descargada</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-checkbox [checked]="element.Descargada" [disabled]="true">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openDialogToEditMusic(element,$event)">
+              Modificar
+            </button>
+            <button mat-menu-item (click)="deleteTipoPago(element,$event)">
+              Eliminar
+            </button>
+            <button mat-menu-item (click)="downloadFile(element,$event)">
+              File
+            </button>
+          </mat-menu>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event">
+    </mat-paginator>
+  </div>

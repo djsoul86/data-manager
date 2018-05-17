@@ -26,12 +26,14 @@ import { CargararchivosComponent } from './auth/cargararchivos/cargararchivos.co
 import { AuthGuard } from './common/guards/auth.guard';
 import { PublicGuard } from  './common/guards/public.guard';
 import { LoginComponent } from './public/login/login.component';
+import { SpotifyComponent } from './auth/spotify/spotify.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/login' },
     { path: '', pathMatch: 'full', redirectTo: '/home' },
     { path: 'login', component: LoginComponent, pathMatch: 'full', canActivate: [ PublicGuard ] },
     { path: 'mantenimiento', component: MantenimientoComponent,pathMatch:'full',canActivate:[AuthGuard] },
+    { path: 'spotify', component: SpotifyComponent,pathMatch:'full',canActivate:[AuthGuard] },
     { path: 'pendientes', component: PendientesComponent,pathMatch:'full',canActivate:[AuthGuard] },
     { path: 'pass', component: PassComponent,pathMatch:'full',canActivate:[AuthGuard] },
     { path: 'anotaciones', component: AnotacionesComponent,pathMatch:'full',canActivate:[AuthGuard] },
