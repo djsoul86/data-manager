@@ -26,8 +26,9 @@ export class ConsultarTipopagoComponent implements OnInit {
   sortedData;
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = this.utils.applyFilter(filterValue, this.dataSource);
+    this.utils.applyFilter(filterValue, this.dataSource);
   }
+ 
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
@@ -79,6 +80,7 @@ export class ConsultarTipopagoComponent implements OnInit {
   refreshDataTable(tipop: Observable<any>) {
     tipop.subscribe(
       (data: any) => {
+        console.log(data);
         this.tipopago = data;
         this.sortedData = this.tipopago.slice();
         this.dataSource = new MatTableDataSource<TipoPago>(this.tipopago);

@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { SpotifyService } from './services/spotify.service';
 import { SnackBarUtil } from '../../utils/snackBar.util';
 import { EditSpotifyComponent } from './edit-spotify/edit-spotify.component';
+import { FilterUtil } from '../../utils/filter.util';
 
 @Component({
   selector: 'app-spotify',
@@ -33,14 +34,21 @@ export class SpotifyComponent implements OnInit {
     { Id: '5', Nombre: 'House' },
     { Id: '6', Nombre: 'House Relax' }
   ];
+
+  applyFilter(filterValue: string) {
+    this.utils.applyFilter(filterValue, this.dataSource);
+  }
+
   constructor(public spoty_serv: SpotifyService
     , public spot: Spotify
     , public snack: SnackBarUtil
-    , public dialog: MatDialog) { }
+    , public dialog: MatDialog
+    , public utils: FilterUtil) { }
 
   ngOnInit() {
   }
 
+  
   onSubmitFind(event: Event) {
     if (event != null) {
       event.preventDefault();

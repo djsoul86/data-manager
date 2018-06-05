@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
           console.error('Unable to login');
           // this.openDialogWithError();
         }else{
-          console.error(error);
+          console.error(error.error);
           this.authService.hasSession = false;
         }
       }

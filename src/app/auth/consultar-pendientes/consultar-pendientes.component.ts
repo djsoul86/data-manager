@@ -50,8 +50,8 @@ export class ConsultarPendientesComponent implements OnInit {
       }
     );
   }
-  applyFilter(filterValue:string){
-    this.dataSource.filter = this.utils.applyFilter(filterValue,this.dataSource);
+  applyFilter(filterValue: string) {
+    this.utils.applyFilter(filterValue, this.dataSource);
   }
 
   onSubmitFind(event: Event) {

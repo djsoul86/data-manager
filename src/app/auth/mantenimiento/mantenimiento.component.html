@@ -3,6 +3,7 @@
 <mat-nav-list>
   <mat-list-item *ngFor="let link of links">
       <mat-icon mat-list-icon>label</mat-icon>
-     <a matLine href="{{ link.url }}">{{ link.id }}</a>
+      <a matLine  routerLink="/{{ link.url }}">{{ link.id }}</a>    
   </mat-list-item>
 </mat-nav-list>
+

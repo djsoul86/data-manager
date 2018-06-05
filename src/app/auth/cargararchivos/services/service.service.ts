@@ -19,12 +19,13 @@ export class ServiceService {
   }
 
 
-  create(archivo: File): any {
+  create(archivo: File,tarjeta:string): any {
     const url = `${this.apiURL}/api/ApiRequest/guardarFile`;
     const formData: FormData = new FormData();
     if (archivo != null) {
       formData.append('File', archivo, archivo.name);
     }
+    formData.append('Tipo',tarjeta);
     return this.http.put(url, formData).subscribe(
       (data => console.log(data)),
       (err: HttpErrorResponse) => {

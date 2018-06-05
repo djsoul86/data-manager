@@ -10,6 +10,17 @@
     </tr>
     <tr>
       <td>
+        <mat-form-field>
+          <mat-select placeholder="Tarjeta" [(ngModel)]="selectedCard" [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let card of cards" [value]="card.viewValue">
+              {{ card.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <div class="button-row">
           <button mat-raised-button color="primary">Buscar</button>
         </div>

@@ -24,11 +24,14 @@ export class CrearanotacionesService {
   create(pendiente: Anotaciones, archivo: File): any {
     const url = `${this.apiURL}/api/ApiAnotaciones`;
     const formData: FormData = new FormData();
-    formData.append('File', archivo, archivo.name);
+    if (archivo != null) {
+      formData.append('File', archivo, archivo.name);
+    }
     formData.append('Proyecto', pendiente.Proyecto);
+    formData.append('Anotacion', pendiente.Anotacion);
     pendiente.File = new FormData();
 
-    return this.httpClient.post(url, formData).subscribe(
+    return this.httpClient.put(url, formData).subscribe(
       (data => console.log(data)),
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
